@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link as ReachRouterLink } from 'react-router-dom'
 
 import {
   Container,
@@ -7,6 +8,7 @@ import {
   ListContainer,
   Item,
   Pane,
+  Link
 } from './styles/nextTripStyles'
 
 const NextTrip = ({children, ...restProps}) => {
@@ -31,6 +33,12 @@ NextTrip.Item = function NextTripItem ({ children, ...restProps }) {
 
 NextTrip.Pane = function NextTripPane ({ children, ...restProps }) {
   return <Pane { ...restProps }>{ children }</Pane>
+}
+
+NextTrip.Link = function NextTripLink ({ to, children, ...restProps }) {
+  return <Link { ...restProps }>
+    <ReachRouterLink to={to}>{ children }</ReachRouterLink>
+  </Link>
 }
 
 

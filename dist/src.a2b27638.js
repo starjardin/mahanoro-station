@@ -38394,7 +38394,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Pane = exports.Item = exports.ListContainer = exports.Title = exports.Header = exports.Container = void 0;
+exports.Pane = exports.Item = exports.ListContainer = exports.Title = exports.Header = exports.Link = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -38402,6 +38402,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const Container = _styledComponents.default.div``;
 exports.Container = Container;
+const Link = _styledComponents.default.div``;
+exports.Link = Link;
 const Header = _styledComponents.default.header``;
 exports.Header = Header;
 const Title = _styledComponents.default.h2``;
@@ -38433,6 +38435,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
+
+var _reactRouterDom = require("react-router-dom");
 
 var _nextTripStyles = require("./styles/nextTripStyles");
 
@@ -38480,9 +38484,19 @@ NextTrip.Pane = function NextTripPane({
   return /*#__PURE__*/_react.default.createElement(_nextTripStyles.Pane, restProps, children);
 };
 
+NextTrip.Link = function NextTripLink({
+  to,
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_nextTripStyles.Link, restProps, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: to
+  }, children));
+};
+
 var _default = NextTrip;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./styles/nextTripStyles":"src/components/nextTrip/styles/nextTripStyles.js"}],"src/components/button/styles/buttonStyles.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./styles/nextTripStyles":"src/components/nextTrip/styles/nextTripStyles.js"}],"src/components/button/styles/buttonStyles.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38510,6 +38524,7 @@ const ButtonElement = _styledComponents.default.button`
   background-color: #E53170;
   cursor: pointer;
   &:disabled {
+    cursor: not-allowed;
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), #E53170;
   }
 `;
@@ -38551,7 +38566,77 @@ Button.Text = function ButtonText({
 
 var _default = Button;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./styles/buttonStyles":"src/components/button/styles/buttonStyles.js"}],"src/components/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./styles/buttonStyles":"src/components/button/styles/buttonStyles.js"}],"src/components/bookSeat/styles/bookSeatsStyles.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Title = exports.Pannel = exports.Header = exports.Container = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Container = _styledComponents.default.div``;
+exports.Container = Container;
+const Header = _styledComponents.default.header``;
+exports.Header = Header;
+const Pannel = _styledComponents.default.div``;
+exports.Pannel = Pannel;
+const Title = _styledComponents.default.h2``;
+exports.Title = Title;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/bookSeat/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _bookSeatsStyles = require("./styles/bookSeatsStyles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const BookSeat = ({
+  children,
+  ...restProps
+}) => {
+  return /*#__PURE__*/_react.default.createElement(_bookSeatsStyles.Container, restProps, children);
+};
+
+BookSeat.Header = function BookSeatHeader({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_bookSeatsStyles.Header, restProps, children);
+};
+
+BookSeat.Pannel = function BookSeatPannel({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_bookSeatsStyles.Pannel, restProps, children);
+};
+
+BookSeat.Title = function BookSeatTitle({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_bookSeatsStyles.Title, restProps, children);
+}; //BookSeat.Header = function BookSeatHeader ({ children, ...restProps }) {
+//  return <Header { ...restProps }>{ children }</Header>
+//}
+//BookSeat.Header = function BookSeatHeader ({ children, ...restProps }) {
+//  return <Header { ...restProps }>{ children }</Header>
+//}
+
+
+var _default = BookSeat;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","./styles/bookSeatsStyles":"src/components/bookSeat/styles/bookSeatsStyles.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38581,6 +38666,12 @@ Object.defineProperty(exports, "Button", {
     return _button.default;
   }
 });
+Object.defineProperty(exports, "BookSeat", {
+  enumerable: true,
+  get: function () {
+    return _bookSeat.default;
+  }
+});
 
 var _header = _interopRequireDefault(require("./header"));
 
@@ -38590,8 +38681,10 @@ var _nextTrip = _interopRequireDefault(require("./nextTrip"));
 
 var _button = _interopRequireDefault(require("./button"));
 
+var _bookSeat = _interopRequireDefault(require("./bookSeat"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./header":"src/components/header/index.js","./destinations":"src/components/destinations/index.js","./nextTrip":"src/components/nextTrip/index.js","./button":"src/components/button/index.js"}],"src/containers/HeaderContiner.js":[function(require,module,exports) {
+},{"./header":"src/components/header/index.js","./destinations":"src/components/destinations/index.js","./nextTrip":"src/components/nextTrip/index.js","./button":"src/components/button/index.js","./bookSeat":"src/components/bookSeat/index.js"}],"src/containers/HeaderContiner.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38613,7 +38706,57 @@ const HeaderContiner = () => {
 
 var _default = HeaderContiner;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"src/containers/destinationsContainer.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"src/containers/bookSeatContainer.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var _reactRouterDom = require("react-router-dom");
+
+var _components = require("../components");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const BookSeatContainer = () => {
+  const trips = (0, _reactRedux.useSelector)(state => state.trips);
+  const {
+    date
+  } = (0, _reactRouterDom.useParams)();
+  console.log(date);
+  const car = trips.find(item => Number(item.departureTime) == date);
+  return /*#__PURE__*/_react.default.createElement(_components.BookSeat, null);
+};
+
+var _default = BookSeatContainer;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js"}],"src/pages/bookSeat.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _bookSeatContainer = _interopRequireDefault(require("../containers/bookSeatContainer"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const BookSeats = () => {
+  return /*#__PURE__*/_react.default.createElement(_bookSeatContainer.default, null);
+};
+
+var _default = BookSeats;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../containers/bookSeatContainer":"src/containers/bookSeatContainer.js"}],"src/containers/destinationsContainer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38726,10 +38869,12 @@ const NextTripContainer = () => {
     text: "Book Seat",
     color: "#fff",
     disabled: true
-  }) : /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
+  }) : /*#__PURE__*/_react.default.createElement(_components.NextTrip.Link, {
+    to: `/destination/${destination}/${item.departureTime}`
+  }, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
     text: "Book Seat",
     color: "#fff"
-  }))))));
+  })))))));
 };
 
 var _default = NextTripContainer;
@@ -38769,6 +38914,8 @@ var _actions = require("./actions");
 
 var _HeaderContiner = _interopRequireDefault(require("./containers/HeaderContiner"));
 
+var _bookSeat = _interopRequireDefault(require("./pages/bookSeat"));
+
 var _home = _interopRequireDefault(require("./pages/home"));
 
 var _nextTrip = _interopRequireDefault(require("./pages/nextTrip"));
@@ -38788,10 +38935,13 @@ function App() {
     exact: true,
     path: "/"
   }, /*#__PURE__*/_react.default.createElement(_home.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    exact: true,
     path: "/destination/:destination"
-  }, /*#__PURE__*/_react.default.createElement(_nextTrip.default, null))));
+  }, /*#__PURE__*/_react.default.createElement(_nextTrip.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    path: "/destination/:destination/:date"
+  }, /*#__PURE__*/_react.default.createElement(_bookSeat.default, null))));
 }
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./actions":"src/actions/index.js","./containers/HeaderContiner":"src/containers/HeaderContiner.js","./pages/home":"src/pages/home.js","./pages/nextTrip":"src/pages/nextTrip.js"}],"node_modules/redux-thunk/es/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./actions":"src/actions/index.js","./containers/HeaderContiner":"src/containers/HeaderContiner.js","./pages/bookSeat":"src/pages/bookSeat.js","./pages/home":"src/pages/home.js","./pages/nextTrip":"src/pages/nextTrip.js"}],"node_modules/redux-thunk/es/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

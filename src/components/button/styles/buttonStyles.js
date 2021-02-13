@@ -12,6 +12,7 @@ export const ButtonElement = styled.button`
   background-color: #E53170;
   cursor: pointer;
   &:disabled {
+    cursor: not-allowed;
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), #E53170;
   }
 `

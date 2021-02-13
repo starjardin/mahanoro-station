@@ -41,7 +41,9 @@ const NextTripContainer = () => {
                 color="#fff"
                 disabled
               />
-              : <ButtonContainer text="Book Seat" color="#fff" />
+              : <NextTrip.Link to={`/destination/${destination}/${item.departureTime}`}>
+                <ButtonContainer text="Book Seat" color="#fff" />
+              </NextTrip.Link>
             } 
           </NextTrip.Pane>
         </NextTrip.Item>
