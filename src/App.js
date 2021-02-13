@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
-export default function App() {
+import { loadingState } from './actions'
+import Home from './pages/home'
+
+export default function App () {
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    dispatch(loadingState())
+  }, [])
+
   return (
-    <h2>
-      Hello world
-    </h2>
+    <Home />
   )
 }

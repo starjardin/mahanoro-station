@@ -1,5 +1,18 @@
 import React from 'react'
 import { render } from 'react-dom'
-import App from './App'
+import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
 
-render(<App />, document.querySelector("#root"));
+import App from './App'
+import store from './store'
+
+console.log(store.getState());
+
+render(
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
+  document.querySelector("#root")
+)
