@@ -17,7 +17,11 @@ const DestinationsContainer = () => {
       </Header.Heading>
     <Destinations.ListContainer>
       { destinations.map((item, index) => (
-        <Destinations.Item key={index}>{ item }</Destinations.Item>
+        <Destinations.Item key={ index }>
+          <Destinations.Link to={`/destination/${item}`}>
+            { item }
+          </Destinations.Link>
+        </Destinations.Item>
       ))}
     </Destinations.ListContainer>
   </Destinations>

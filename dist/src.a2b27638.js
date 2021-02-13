@@ -38306,14 +38306,16 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const Container = _styledComponents.default.div`
-  max-width: 100%;
+  text-align: center;
 `;
 exports.Container = Container;
 const ListContainer = _styledComponents.default.ul`
   display: grid;
-  grid-template-columns : repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns : repeat(auto-fill, minmax(300px, 1fr));
   column-gap: 2rem;
   row-gap: 1rem;
+  padding: 0;
+  text-align: start;
 `;
 exports.ListContainer = ListContainer;
 const Item = _styledComponents.default.li`
@@ -38322,9 +38324,20 @@ const Item = _styledComponents.default.li`
   color: #ffffff;
   text-transform: uppercase;
   padding: 1.3rem;
+  text-align: start;
+  cursor: pointer;
 `;
 exports.Item = Item;
-const Link = _styledComponents.default.p``;
+const Link = _styledComponents.default.p`
+  a {
+    color: #ffffff;
+    text-decoration: none;
+    display: inline-block;
+    padding-inline-start: 3rem;
+    text-align: start;
+    cursor: pointer;
+  }
+`;
 exports.Link = Link;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/destinations/index.js":[function(require,module,exports) {
 "use strict";
@@ -38375,7 +38388,170 @@ Destinations.Link = function DestinationsLink({
 
 var _default = Destinations;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./styles/destinationsStyels":"src/components/destinations/styles/destinationsStyels.js"}],"src/components/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./styles/destinationsStyels":"src/components/destinations/styles/destinationsStyels.js"}],"src/components/nextTrip/styles/nextTripStyles.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Pane = exports.Item = exports.ListContainer = exports.Title = exports.Header = exports.Container = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Container = _styledComponents.default.div``;
+exports.Container = Container;
+const Header = _styledComponents.default.header``;
+exports.Header = Header;
+const Title = _styledComponents.default.h2``;
+exports.Title = Title;
+const ListContainer = _styledComponents.default.ul`
+  padding: 0;
+`;
+exports.ListContainer = ListContainer;
+const Item = _styledComponents.default.li`
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin: 20px;
+`;
+exports.Item = Item;
+const Pane = _styledComponents.default.div`
+  margin: 10px;
+  span {
+    display: inline-block;
+  }
+`;
+exports.Pane = Pane;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/nextTrip/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _nextTripStyles = require("./styles/nextTripStyles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const NextTrip = ({
+  children,
+  ...restProps
+}) => {
+  return /*#__PURE__*/_react.default.createElement(_nextTripStyles.Container, restProps, children);
+};
+
+NextTrip.Header = function NextTripHeader({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_nextTripStyles.Header, restProps, children);
+};
+
+NextTrip.Title = function NextTripTitle({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_nextTripStyles.Title, restProps, children);
+};
+
+NextTrip.ListContainer = function NextTripListContainer({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_nextTripStyles.ListContainer, restProps, children);
+};
+
+NextTrip.Item = function NextTripItem({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_nextTripStyles.Item, restProps, children);
+};
+
+NextTrip.Pane = function NextTripPane({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_nextTripStyles.Pane, restProps, children);
+};
+
+var _default = NextTrip;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","./styles/nextTripStyles":"src/components/nextTrip/styles/nextTripStyles.js"}],"src/components/button/styles/buttonStyles.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ButtonElement = exports.Container = exports.Text = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Text = _styledComponents.default.span`
+  color: ${({
+  color
+}) => color}
+`;
+exports.Text = Text;
+const Container = _styledComponents.default.div`
+  padding: 0;
+`;
+exports.Container = Container;
+const ButtonElement = _styledComponents.default.button`
+  border: none;
+  padding: 1rem 1.5rem;
+  background-color: #E53170;
+  cursor: pointer;
+  &:disabled {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), #E53170;
+  }
+`;
+exports.ButtonElement = ButtonElement;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/button/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _buttonStyles = require("./styles/buttonStyles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Button = ({
+  children,
+  ...restProps
+}) => {
+  return /*#__PURE__*/_react.default.createElement(_buttonStyles.Container, restProps, children);
+};
+
+Button.ButtonElement = function ButtonButtonElement({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_buttonStyles.ButtonElement, restProps, children);
+};
+
+Button.Text = function ButtonText({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_buttonStyles.Text, restProps, children);
+};
+
+var _default = Button;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","./styles/buttonStyles":"src/components/button/styles/buttonStyles.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38393,13 +38569,51 @@ Object.defineProperty(exports, "Destinations", {
     return _destinations.default;
   }
 });
+Object.defineProperty(exports, "NextTrip", {
+  enumerable: true,
+  get: function () {
+    return _nextTrip.default;
+  }
+});
+Object.defineProperty(exports, "Button", {
+  enumerable: true,
+  get: function () {
+    return _button.default;
+  }
+});
 
 var _header = _interopRequireDefault(require("./header"));
 
 var _destinations = _interopRequireDefault(require("./destinations"));
 
+var _nextTrip = _interopRequireDefault(require("./nextTrip"));
+
+var _button = _interopRequireDefault(require("./button"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./header":"src/components/header/index.js","./destinations":"src/components/destinations/index.js"}],"src/containers/destinationsContainer.js":[function(require,module,exports) {
+},{"./header":"src/components/header/index.js","./destinations":"src/components/destinations/index.js","./nextTrip":"src/components/nextTrip/index.js","./button":"src/components/button/index.js"}],"src/containers/HeaderContiner.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _components = require("../components");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const HeaderContiner = () => {
+  return /*#__PURE__*/_react.default.createElement(_components.Header, null, /*#__PURE__*/_react.default.createElement(_components.Header.Heading, null, /*#__PURE__*/_react.default.createElement(_components.Header.Title, null, "Mahanoro station"), /*#__PURE__*/_react.default.createElement(_components.Header.Image, {
+    src: "/design/1.png"
+  })), /*#__PURE__*/_react.default.createElement(_components.Header.Acount, null, "My acount"));
+};
+
+var _default = HeaderContiner;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"src/containers/destinationsContainer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38426,34 +38640,14 @@ const DestinationsContainer = () => {
     src: "/design/1.png"
   })), /*#__PURE__*/_react.default.createElement(_components.Destinations.ListContainer, null, destinations.map((item, index) => /*#__PURE__*/_react.default.createElement(_components.Destinations.Item, {
     key: index
-  }, item))));
+  }, /*#__PURE__*/_react.default.createElement(_components.Destinations.Link, {
+    to: `/destination/${item}`
+  }, item)))));
 };
 
 var _default = DestinationsContainer;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../components":"src/components/index.js"}],"src/containers/HeaderContiner.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _components = require("../components");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const HeaderContiner = () => {
-  return /*#__PURE__*/_react.default.createElement(_components.Header, null, /*#__PURE__*/_react.default.createElement(_components.Header.Heading, null, /*#__PURE__*/_react.default.createElement(_components.Header.Title, null, "Mahanoro station"), /*#__PURE__*/_react.default.createElement(_components.Header.Image, {
-    src: "/design/1.png"
-  })), /*#__PURE__*/_react.default.createElement(_components.Header.Acount, null, "My acount"));
-};
-
-var _default = HeaderContiner;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"src/pages/home.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../components":"src/components/index.js"}],"src/pages/home.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38470,9 +38664,94 @@ var _HeaderContiner = _interopRequireDefault(require("../containers/HeaderContin
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Home() {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_HeaderContiner.default, null), /*#__PURE__*/_react.default.createElement(_destinationsContainer.default, null));
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_destinationsContainer.default, null));
 }
-},{"react":"node_modules/react/index.js","../containers/destinationsContainer":"src/containers/destinationsContainer.js","../containers/HeaderContiner":"src/containers/HeaderContiner.js"}],"src/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../containers/destinationsContainer":"src/containers/destinationsContainer.js","../containers/HeaderContiner":"src/containers/HeaderContiner.js"}],"src/containers/buttonContainer.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _components = require("../components");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const ButtonContainer = ({
+  text,
+  color,
+  disabled
+}) => {
+  return /*#__PURE__*/_react.default.createElement(_components.Button, null, /*#__PURE__*/_react.default.createElement(_components.Button.ButtonElement, {
+    disabled: disabled
+  }, /*#__PURE__*/_react.default.createElement(_components.Button.Text, {
+    color: color
+  }, text)));
+};
+
+var _default = ButtonContainer;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"src/containers/NextTripContainer.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var _reactRouterDom = require("react-router-dom");
+
+var _components = require("../components");
+
+var _buttonContainer = _interopRequireDefault(require("./buttonContainer"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const NextTripContainer = () => {
+  const trips = (0, _reactRedux.useSelector)(state => state.trips);
+  const {
+    destination
+  } = (0, _reactRouterDom.useParams)();
+  const availabeNextTrip = trips.filter(item => item.destination === destination);
+  return /*#__PURE__*/_react.default.createElement(_components.NextTrip, null, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Header, null, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Title, null, "Next trip to: ", destination)), /*#__PURE__*/_react.default.createElement(_components.NextTrip.ListContainer, null, availabeNextTrip.map(item => /*#__PURE__*/_react.default.createElement(_components.NextTrip.Item, {
+    key: item.id
+  }, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Pane, null, "I am the car"), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Pane, null, /*#__PURE__*/_react.default.createElement("div", null, item.departureTime), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, item.departureTime), /*#__PURE__*/_react.default.createElement("span", null, item.seats.filter(seat => seat.isAvailable).length, " seats lefts"))), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Pane, null, item.seats.filter(seat => seat.isAvailable).length === 0 ? /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
+    text: "Book Seat",
+    color: "#fff",
+    disabled: true
+  }) : /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
+    text: "Book Seat",
+    color: "#fff"
+  }))))));
+};
+
+var _default = NextTripContainer;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js","./buttonContainer":"src/containers/buttonContainer.js"}],"src/pages/nextTrip.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = NextTrip;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _NextTripContainer = _interopRequireDefault(require("../containers/NextTripContainer"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function NextTrip() {
+  return /*#__PURE__*/_react.default.createElement(_NextTripContainer.default, null);
+}
+},{"react":"node_modules/react/index.js","../containers/NextTripContainer":"src/containers/NextTripContainer.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38484,9 +38763,15 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactRedux = require("react-redux");
 
+var _reactRouterDom = require("react-router-dom");
+
 var _actions = require("./actions");
 
+var _HeaderContiner = _interopRequireDefault(require("./containers/HeaderContiner"));
+
 var _home = _interopRequireDefault(require("./pages/home"));
+
+var _nextTrip = _interopRequireDefault(require("./pages/nextTrip"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38499,9 +38784,14 @@ function App() {
   (0, _react.useEffect)(() => {
     dispatch((0, _actions.loadingState)());
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_home.default, null);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_HeaderContiner.default, null), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    exact: true,
+    path: "/"
+  }, /*#__PURE__*/_react.default.createElement(_home.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    path: "/destination/:destination"
+  }, /*#__PURE__*/_react.default.createElement(_nextTrip.default, null))));
 }
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","./actions":"src/actions/index.js","./pages/home":"src/pages/home.js"}],"node_modules/redux-thunk/es/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./actions":"src/actions/index.js","./containers/HeaderContiner":"src/containers/HeaderContiner.js","./pages/home":"src/pages/home.js","./pages/nextTrip":"src/pages/nextTrip.js"}],"node_modules/redux-thunk/es/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38626,7 +38916,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62729" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50025" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

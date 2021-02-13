@@ -5,7 +5,6 @@ import HeaderContiner from '../containers/HeaderContiner'
 export default function Home() {
   return (
     <>
-      <HeaderContiner />
       <DestinationsContainer />
     </>
   )
