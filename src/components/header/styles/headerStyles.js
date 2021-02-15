@@ -6,24 +6,27 @@ export const Container = styled.div`
   background-color: #0F0E17;
   align-items: center;
   padding: .5rem 1rem;
+  a {
+    text-decoration: none;
+  }
 `
 export const Title = styled.h2`
-  ${({color}) => color ? `color: ${color}` : `color : #FFFFFE`}
+  ${({ color }) => color ? `color: ${ color }` : `color : #FFFFFE`};
+  width: 100%;
 `
 
 export const Heading = styled.div`
   display: flex;
-  justify-content: space-between;
   flex-direction: row-reverse;
   align-items: center;
+  justify-content: center;
   margin: 0;
-  padding: 0;
-  gap: 1rem;
+  gap: 2rem;
 `
 export const Acount = styled.div`
   color: #A7A9BE;
 `
 export const Image = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 20%;
+  height: 20%;
 `

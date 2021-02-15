@@ -3,25 +3,27 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 
 import { BookSeat } from '../components'
+import { bookSeat } from '../actions'
 import { toggleModal } from '../actions'
 import Seat from './../../design/seat.jpg'
 import BookedSeat from '../../design/bookedSeat.jpg'
 import BookingSeat from '../../design/bookingSeat.jpg'
 import ButtonContainer from './buttonContainer'
+import carImage from '../../design/car.jpg'
+import warning from '../../design/warning.jpg'
 
 const BookSeatContainer = () => {
   const trips = useSelector(state => state.trips)
   const users = useSelector(state => state.users)
   const modal = useSelector(state => state.modal)
-  console.log(users);
-  console.log(modal);
+  const bookings = useSelector(state => state.bookings)
   
   const dispatch = useDispatch()
   
-  const { date } = useParams()
-  const car = trips.find(item => Number(item.departureTime) == Number(date))
+  const { id } = useParams()
+  const car = trips.find(item => Number(item.id) == Number(id))
   const seats = car?.seats.map((item, index) => (
-    <BookSeat.Seat key={index}>
+    <BookSeat.Seat key={index} onClick={() => dispatch(bookSeat(item, id))}>
       {item.isAvailable && !item.passengerFirstName && !item.passengerLastName
         ? <img src={ Seat } />
         : !item.isAvailable && item.passengerFirstName && item.passengerLastName ?
@@ -40,11 +42,12 @@ const BookSeatContainer = () => {
   </>
   const destination = car?.destination
   const price = car?.price
-  const buttonText = `Book .... seats`
+  const buttonText = `Book ${bookings.length} seats`
   
   return <BookSeat modal={modal}>
     <BookSeat.Header>
       <BookSeat.Title>
+        <img src={carImage} />
         Book a seat to:
          { destination }
       </BookSeat.Title>
@@ -66,7 +69,9 @@ const BookSeatContainer = () => {
     </BookSeat.Header>
     <div>
       {modal && <BookSeat.Modal modal={modal}>
-        <BookSeat.ModalWarning>Booking confirmed</BookSeat.ModalWarning>
+        <BookSeat.ModalWarning>
+          <img src={ warning } /> Booking confirmed
+        </BookSeat.ModalWarning>
         <BookSeat.ModalText>Thank you for trusting our services. Your bookning has been added to your account, you can review it there</BookSeat.ModalText>
         <Link to="/account">
           <ButtonContainer

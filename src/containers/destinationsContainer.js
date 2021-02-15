@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Destinations, Header } from '../components'
+import car from '../../design/car.jpg'
 
 const DestinationsContainer = () => {
   const trips = useSelector(state => state.trips)
@@ -12,7 +13,7 @@ const DestinationsContainer = () => {
         <Header.Title
           color="#000000"
         >Where are you going?</Header.Title>
-        <Header.Image src="/design/1.png"/>
+        <Header.Image src={car}/>
       </Header.Heading>
     <Destinations.ListContainer>
       { destinations.map((item, index) => (

@@ -29,7 +29,7 @@ export default function App () {
         <Route exact path="/destination/:destination">
           <NextTrip />
         </Route>
-        <Route path="/destination/:destination/:date">
+        <Route path="/destination/:destination/:id">
           <BookSeats />
         </Route>
       </Switch>
