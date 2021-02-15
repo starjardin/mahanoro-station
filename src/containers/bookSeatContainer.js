@@ -68,7 +68,7 @@ const BookSeatContainer = () => {
       {modal && <BookSeat.Modal modal={modal}>
         <BookSeat.ModalWarning>Booking confirmed</BookSeat.ModalWarning>
         <BookSeat.ModalText>Thank you for trusting our services. Your bookning has been added to your account, you can review it there</BookSeat.ModalText>
-        <Link to="/acount">
+        <Link to="/account">
           <ButtonContainer
             text="Check your account"
             color="#fff"

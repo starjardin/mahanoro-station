@@ -38551,6 +38551,8 @@ var _buttonStyles = require("./styles/buttonStyles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 const Button = ({
   children,
   ...restProps
@@ -38559,10 +38561,13 @@ const Button = ({
 };
 
 Button.ButtonElement = function ButtonButtonElement({
+  type,
   children,
   ...restProps
 }) {
-  return /*#__PURE__*/_react.default.createElement(_buttonStyles.ButtonElement, restProps, children);
+  return /*#__PURE__*/_react.default.createElement(_buttonStyles.ButtonElement, _extends({
+    type: type
+  }, restProps), children);
 };
 
 Button.Text = function ButtonText({
@@ -38729,7 +38734,91 @@ BookSeat.ModalText = function BookSeatModalText({
 
 var _default = BookSeat;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./styles/bookSeatsStyles":"src/components/bookSeat/styles/bookSeatsStyles.js"}],"src/components/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./styles/bookSeatsStyles":"src/components/bookSeat/styles/bookSeatsStyles.js"}],"src/components/account/styles/accountStyles.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Label = exports.Input = exports.Form = exports.Container = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Container = _styledComponents.default.div``;
+exports.Container = Container;
+const Form = _styledComponents.default.form`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+exports.Form = Form;
+const Input = _styledComponents.default.input`
+  display: block;
+  padding: .6rem 1rem;
+  text-transform: capitalize;
+  background-color: #000000;
+  color: #FF8906;
+  ::placeholder {
+    color: #FF8906;
+  }
+  
+  &:last-child {
+    margin-bottom: 1rem;
+  }
+`;
+exports.Input = Input;
+const Label = _styledComponents.default.label`
+  display:flex;
+  margin-top: 1rem;
+`;
+exports.Label = Label;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/account/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _accountStyles = require("./styles/accountStyles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Account = ({
+  children,
+  ...restProps
+}) => {
+  return /*#__PURE__*/_react.default.createElement(_accountStyles.Container, restProps, children);
+};
+
+Account.Form = function AccountForm({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_accountStyles.Form, restProps, children);
+};
+
+Account.Input = function AccountInput({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_accountStyles.Input, restProps, children);
+};
+
+Account.Label = function AccountLabel({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_accountStyles.Label, restProps, children);
+};
+
+var _default = Account;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","./styles/accountStyles":"src/components/account/styles/accountStyles.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38765,6 +38854,12 @@ Object.defineProperty(exports, "BookSeat", {
     return _bookSeat.default;
   }
 });
+Object.defineProperty(exports, "Account", {
+  enumerable: true,
+  get: function () {
+    return _account.default;
+  }
+});
 
 var _header = _interopRequireDefault(require("./header"));
 
@@ -38776,8 +38871,10 @@ var _button = _interopRequireDefault(require("./button"));
 
 var _bookSeat = _interopRequireDefault(require("./bookSeat"));
 
+var _account = _interopRequireDefault(require("./account"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./header":"src/components/header/index.js","./destinations":"src/components/destinations/index.js","./nextTrip":"src/components/nextTrip/index.js","./button":"src/components/button/index.js","./bookSeat":"src/components/bookSeat/index.js"}],"src/containers/HeaderContiner.js":[function(require,module,exports) {
+},{"./header":"src/components/header/index.js","./destinations":"src/components/destinations/index.js","./nextTrip":"src/components/nextTrip/index.js","./button":"src/components/button/index.js","./bookSeat":"src/components/bookSeat/index.js","./account":"src/components/account/index.js"}],"src/containers/HeaderContiner.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38787,25 +38884,25 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _components = require("../components");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const HeaderContiner = () => {
-  return /*#__PURE__*/_react.default.createElement(_components.Header, null, /*#__PURE__*/_react.default.createElement(_components.Header.Heading, null, /*#__PURE__*/_react.default.createElement(_components.Header.Title, null, "Mahanoro station"), /*#__PURE__*/_react.default.createElement(_components.Header.Image, {
+  return /*#__PURE__*/_react.default.createElement(_components.Header, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/"
+  }, /*#__PURE__*/_react.default.createElement(_components.Header.Heading, null, /*#__PURE__*/_react.default.createElement(_components.Header.Title, null, "Mahanoro station"), /*#__PURE__*/_react.default.createElement(_components.Header.Image, {
     src: "/design/1.png"
-  })), /*#__PURE__*/_react.default.createElement(_components.Header.Acount, null, "My acount"));
+  }))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/account"
+  }, /*#__PURE__*/_react.default.createElement(_components.Header.Acount, null, "My acount")));
 };
 
 var _default = HeaderContiner;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"design/seat.jpg":[function(require,module,exports) {
-module.exports = "/seat.8617be84.jpg";
-},{}],"design/bookedSeat.jpg":[function(require,module,exports) {
-module.exports = "/bookedSeat.8fc0a748.jpg";
-},{}],"design/bookingSeat.jpg":[function(require,module,exports) {
-module.exports = "/bookingSeat.9e8c23de.jpg";
-},{}],"src/containers/buttonContainer.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js"}],"src/containers/buttonContainer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38833,7 +38930,62 @@ const ButtonContainer = ({
 
 var _default = ButtonContainer;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"src/containers/bookSeatContainer.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"src/containers/AccountContainer.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = AccountContainer;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _components = require("../components");
+
+var _buttonContainer = _interopRequireDefault(require("./buttonContainer"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function AccountContainer() {
+  return /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Form, null, /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "First Name"), /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
+    type: "text",
+    placeholder: "firstName"
+  }), /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "Last Name"), /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
+    type: "text",
+    placeholder: "lastName"
+  }), /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "Phone Number"), /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
+    type: "number",
+    placeholder: "0349789355"
+  }), /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
+    type: "submit",
+    text: "update",
+    color: "#fff"
+  })));
+}
+},{"react":"node_modules/react/index.js","../components":"src/components/index.js","./buttonContainer":"src/containers/buttonContainer.js"}],"src/pages/account.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Account;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _AccountContainer = _interopRequireDefault(require("../containers/AccountContainer"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Account() {
+  return /*#__PURE__*/_react.default.createElement(_AccountContainer.default, null);
+}
+},{"react":"node_modules/react/index.js","../containers/AccountContainer":"src/containers/AccountContainer.js"}],"design/seat.jpg":[function(require,module,exports) {
+module.exports = "/seat.8617be84.jpg";
+},{}],"design/bookedSeat.jpg":[function(require,module,exports) {
+module.exports = "/bookedSeat.8fc0a748.jpg";
+},{}],"design/bookingSeat.jpg":[function(require,module,exports) {
+module.exports = "/bookingSeat.9e8c23de.jpg";
+},{}],"src/containers/bookSeatContainer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38897,7 +39049,7 @@ const BookSeatContainer = () => {
   }))))), /*#__PURE__*/_react.default.createElement("div", null, modal && /*#__PURE__*/_react.default.createElement(_components.BookSeat.Modal, {
     modal: modal
   }, /*#__PURE__*/_react.default.createElement(_components.BookSeat.ModalWarning, null, "Booking confirmed"), /*#__PURE__*/_react.default.createElement(_components.BookSeat.ModalText, null, "Thank you for trusting our services. Your bookning has been added to your account, you can review it there"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/acount"
+    to: "/account"
   }, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
     text: "Check your account",
     color: "#fff"
@@ -39055,6 +39207,8 @@ var _actions = require("./actions");
 
 var _HeaderContiner = _interopRequireDefault(require("./containers/HeaderContiner"));
 
+var _account = _interopRequireDefault(require("./pages/account"));
+
 var _bookSeat = _interopRequireDefault(require("./pages/bookSeat"));
 
 var _home = _interopRequireDefault(require("./pages/home"));
@@ -39077,12 +39231,16 @@ function App() {
     path: "/"
   }, /*#__PURE__*/_react.default.createElement(_home.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
+    exact: true,
+    path: "/account"
+  }, /*#__PURE__*/_react.default.createElement(_account.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    exact: true,
     path: "/destination/:destination"
   }, /*#__PURE__*/_react.default.createElement(_nextTrip.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/destination/:destination/:date"
   }, /*#__PURE__*/_react.default.createElement(_bookSeat.default, null))));
 }
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./actions":"src/actions/index.js","./containers/HeaderContiner":"src/containers/HeaderContiner.js","./pages/bookSeat":"src/pages/bookSeat.js","./pages/home":"src/pages/home.js","./pages/nextTrip":"src/pages/nextTrip.js"}],"node_modules/redux-thunk/es/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./actions":"src/actions/index.js","./containers/HeaderContiner":"src/containers/HeaderContiner.js","./pages/account":"src/pages/account.js","./pages/bookSeat":"src/pages/bookSeat.js","./pages/home":"src/pages/home.js","./pages/nextTrip":"src/pages/nextTrip.js"}],"node_modules/redux-thunk/es/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

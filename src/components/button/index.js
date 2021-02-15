@@ -6,8 +6,8 @@ const Button = ({children, ...restProps}) => {
   return <Container { ...restProps }>{ children }</Container>
 }
 
-Button.ButtonElement = function ButtonButtonElement ({ children, ...restProps }) {
-  return <ButtonElement { ...restProps }>{ children }</ButtonElement>
+Button.ButtonElement = function ButtonButtonElement ({type, children, ...restProps }) {
+  return <ButtonElement type={type} { ...restProps }>{ children }</ButtonElement>
 }
 
 Button.Text = function ButtonText ({ children, ...restProps }) {
