@@ -38631,7 +38631,9 @@ const SeatContainer = _styledComponents.default.div`
   justify-content: flex-end;
 `;
 exports.SeatContainer = SeatContainer;
-const InfoContainer = _styledComponents.default.div``;
+const InfoContainer = _styledComponents.default.div`
+  text-align: center;
+`;
 exports.InfoContainer = InfoContainer;
 const Modal = _styledComponents.default.div`
   width: 70vw;
@@ -38649,12 +38651,16 @@ const Modal = _styledComponents.default.div`
 exports.Modal = Modal;
 const ModalWarning = _styledComponents.default.h2`
   text-transform: uppercase;
+  text-align: center;
   opacity: 1;
 `;
 exports.ModalWarning = ModalWarning;
-const ModalText = _styledComponents.default.div`
+const ModalText = _styledComponents.default.p`
   color: #000;
   opacity: 1;
+  width: 45vw;
+  text-align: center;
+  
 `;
 exports.ModalText = ModalText;
 const Seat = _styledComponents.default.div`
@@ -38841,7 +38847,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ListItem = exports.ListContainer = exports.Header = exports.Container = void 0;
+exports.Pane = exports.ListItem = exports.ListContainer = exports.Header = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -38858,6 +38864,8 @@ const ListContainer = _styledComponents.default.ul`
 exports.ListContainer = ListContainer;
 const ListItem = _styledComponents.default.li``;
 exports.ListItem = ListItem;
+const Pane = _styledComponents.default.div``;
+exports.Pane = Pane;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/myBookings/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -38904,7 +38912,7 @@ MyBookings.Pane = function MyBookingsPane({
   children,
   ...restProps
 }) {
-  return /*#__PURE__*/_react.default.createElement(Pane, restProps, children);
+  return /*#__PURE__*/_react.default.createElement(_myBookingsStyles.Pane, restProps, children);
 };
 
 var _default = MyBookings;
@@ -39033,7 +39041,9 @@ const ButtonContainer = ({
 
 var _default = ButtonContainer;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"src/containers/myBookingsContainer.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"design/car.jpg":[function(require,module,exports) {
+module.exports = "/car.a9043555.jpg";
+},{}],"src/containers/myBookingsContainer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39043,17 +39053,29 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _reactRedux = require("react-redux");
+
+var _reactRouterDom = require("react-router-dom");
+
 var _components = require("../components");
+
+var _car = _interopRequireDefault(require("../../design/car.jpg"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const MyBookingsContainer = () => {
-  return /*#__PURE__*/_react.default.createElement(_components.MyBookings, null, "Hello world");
+  const bookings = (0, _reactRedux.useSelector)(state => state.bookings);
+  const users = (0, _reactRedux.useSelector)(state => state.users);
+  const trips = (0, _reactRedux.useSelector)(state => state.trips);
+  return /*#__PURE__*/_react.default.createElement(_components.MyBookings, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Header, null, "My account  \xA0", /*#__PURE__*/_react.default.createElement("span", null, users.firstName, " ", users.lastName)), /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListContainer, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListItem, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: _car.default,
+    alt: "car"
+  })), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null))));
 };
 
 var _default = MyBookingsContainer;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"src/containers/AccountContainer.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js","../../design/car.jpg":"design/car.jpg"}],"src/containers/AccountContainer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39113,8 +39135,6 @@ module.exports = "/seat.8617be84.jpg";
 module.exports = "/bookedSeat.8fc0a748.jpg";
 },{}],"design/bookingSeat.jpg":[function(require,module,exports) {
 module.exports = "/bookingSeat.9e8c23de.jpg";
-},{}],"design/car.jpg":[function(require,module,exports) {
-module.exports = "/car.a9043555.jpg";
 },{}],"design/warning.jpg":[function(require,module,exports) {
 module.exports = "/warning.28fe8934.jpg";
 },{}],"src/containers/bookSeatContainer.js":[function(require,module,exports) {
@@ -39189,7 +39209,7 @@ const BookSeatContainer = () => {
   }, /*#__PURE__*/_react.default.createElement(_components.BookSeat.ModalWarning, null, /*#__PURE__*/_react.default.createElement("img", {
     src: _warning.default
   }), " Booking confirmed"), /*#__PURE__*/_react.default.createElement(_components.BookSeat.ModalText, null, "Thank you for trusting our services. Your bookning has been added to your account, you can review it there"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/account"
+    to: `/account/${car.id}`
   }, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
     text: "Check your account",
     color: "#fff"
@@ -39382,7 +39402,7 @@ function App() {
   }, /*#__PURE__*/_react.default.createElement(_home.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     exact: true,
-    path: "/account"
+    path: "/account/:id"
   }, /*#__PURE__*/_react.default.createElement(_account.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/destination/:destination"

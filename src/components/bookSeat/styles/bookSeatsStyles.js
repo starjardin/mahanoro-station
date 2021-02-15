@@ -20,7 +20,9 @@ export const SeatContainer = styled.div`
   align-items: center;
   justify-content: flex-end;
 `
-export const InfoContainer = styled.div``
+export const InfoContainer = styled.div`
+  text-align: center;
+`
 export const Modal = styled.div`
   width: 70vw;
   height: 50vh;
@@ -36,11 +38,15 @@ export const Modal = styled.div`
 `
 export const ModalWarning = styled.h2`
   text-transform: uppercase;
+  text-align: center;
   opacity: 1;
 `
-export const ModalText = styled.div`
+export const ModalText = styled.p`
   color: #000;
   opacity: 1;
+  width: 45vw;
+  text-align: center;
+  
 `
 
 export const Seat = styled.div`

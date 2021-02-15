@@ -73,7 +73,7 @@ const BookSeatContainer = () => {
           <img src={ warning } /> Booking confirmed
         </BookSeat.ModalWarning>
         <BookSeat.ModalText>Thank you for trusting our services. Your bookning has been added to your account, you can review it there</BookSeat.ModalText>
-        <Link to="/account">
+        <Link to={`/account/${car.id}`}>
           <ButtonContainer
             text="Check your account"
             color="#fff"

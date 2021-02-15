@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Container, Header, ListContainer, ListItem } from './styles/myBookingsStyles'
+import { Container, Pane, Header, ListContainer, ListItem } from './styles/myBookingsStyles'
 
 const MyBookings = ({ children, ...restProps }) => {
   return <Container { ...restProps }>{ children }</Container>
