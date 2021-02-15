@@ -36253,12 +36253,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.loadingState = loadingState;
+exports.toggleModal = toggleModal;
 exports.ACTIONS = void 0;
 
 var _constant = require("../constant/");
 
 const ACTIONS = {
-  loadingState: "LOADIGN_STATE"
+  loadingState: "LOADIGN_STATE",
+  toggleModal: "TOGGLE_MODAL"
 };
 exports.ACTIONS = ACTIONS;
 
@@ -36274,6 +36276,12 @@ function loadingState() {
     }
 
     fectchData();
+  };
+}
+
+function toggleModal() {
+  return {
+    type: ACTIONS.toggleModal
   };
 }
 },{"../constant/":"src/constant/index.js"}],"node_modules/shallowequal/index.js":[function(require,module,exports) {
@@ -38572,20 +38580,69 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Title = exports.Pannel = exports.Header = exports.Container = void 0;
+exports.Seat = exports.ModalText = exports.ModalWarning = exports.Modal = exports.InfoContainer = exports.SeatContainer = exports.Title = exports.Pannel = exports.Header = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const Container = _styledComponents.default.div``;
+const Container = _styledComponents.default.div`
+  ${({
+  modal
+}) => modal && `
+    background-color: #fefefefe;
+    opacity: .2;
+    width: 100vw;
+    height: 100vh;
+  `}
+`;
 exports.Container = Container;
 const Header = _styledComponents.default.header``;
 exports.Header = Header;
-const Pannel = _styledComponents.default.div``;
+const Pannel = _styledComponents.default.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+`;
 exports.Pannel = Pannel;
 const Title = _styledComponents.default.h2``;
 exports.Title = Title;
+const SeatContainer = _styledComponents.default.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  justify-content: flex-end;
+`;
+exports.SeatContainer = SeatContainer;
+const InfoContainer = _styledComponents.default.div``;
+exports.InfoContainer = InfoContainer;
+const Modal = _styledComponents.default.div`
+  width: 70vw;
+  height: 50vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border: 5px solid #E53170;
+  box-sizing: border-box;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 3;
+  opacity: 1;
+`;
+exports.Modal = Modal;
+const ModalWarning = _styledComponents.default.h2`
+  text-transform: uppercase;
+  opacity: 1;
+`;
+exports.ModalWarning = ModalWarning;
+const ModalText = _styledComponents.default.div`
+  color: #000;
+  opacity: 1;
+`;
+exports.ModalText = ModalText;
+const Seat = _styledComponents.default.div`
+  cursor: pointer;
+`;
+exports.Seat = Seat;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/bookSeat/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -38626,13 +38683,49 @@ BookSeat.Title = function BookSeatTitle({
   ...restProps
 }) {
   return /*#__PURE__*/_react.default.createElement(_bookSeatsStyles.Title, restProps, children);
-}; //BookSeat.Header = function BookSeatHeader ({ children, ...restProps }) {
-//  return <Header { ...restProps }>{ children }</Header>
-//}
-//BookSeat.Header = function BookSeatHeader ({ children, ...restProps }) {
-//  return <Header { ...restProps }>{ children }</Header>
-//}
+};
 
+BookSeat.SeatContainer = function BookSeatSeatContainer({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_bookSeatsStyles.SeatContainer, restProps, children);
+};
+
+BookSeat.InfoContainer = function BookSeatInfoContainer({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_bookSeatsStyles.InfoContainer, restProps, children);
+};
+
+BookSeat.Seat = function BookSeatSeat({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_bookSeatsStyles.Seat, restProps, children);
+};
+
+BookSeat.Modal = function BookSeatModal({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_bookSeatsStyles.Modal, restProps, children);
+};
+
+BookSeat.ModalWarning = function BookSeatModalWarning({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_bookSeatsStyles.ModalWarning, restProps, children);
+};
+
+BookSeat.ModalText = function BookSeatModalText({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_bookSeatsStyles.ModalText, restProps, children);
+};
 
 var _default = BookSeat;
 exports.default = _default;
@@ -38706,6 +38799,40 @@ const HeaderContiner = () => {
 
 var _default = HeaderContiner;
 exports.default = _default;
+},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"design/seat.jpg":[function(require,module,exports) {
+module.exports = "/seat.8617be84.jpg";
+},{}],"design/bookedSeat.jpg":[function(require,module,exports) {
+module.exports = "/bookedSeat.8fc0a748.jpg";
+},{}],"design/bookingSeat.jpg":[function(require,module,exports) {
+module.exports = "/bookingSeat.9e8c23de.jpg";
+},{}],"src/containers/buttonContainer.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _components = require("../components");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const ButtonContainer = ({
+  text,
+  color,
+  disabled
+}) => {
+  return /*#__PURE__*/_react.default.createElement(_components.Button, null, /*#__PURE__*/_react.default.createElement(_components.Button.ButtonElement, {
+    disabled: disabled
+  }, /*#__PURE__*/_react.default.createElement(_components.Button.Text, {
+    color: color
+  }, text)));
+};
+
+var _default = ButtonContainer;
+exports.default = _default;
 },{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"src/containers/bookSeatContainer.js":[function(require,module,exports) {
 "use strict";
 
@@ -38722,21 +38849,64 @@ var _reactRouterDom = require("react-router-dom");
 
 var _components = require("../components");
 
+var _actions = require("../actions");
+
+var _seat = _interopRequireDefault(require("./../../design/seat.jpg"));
+
+var _bookedSeat = _interopRequireDefault(require("../../design/bookedSeat.jpg"));
+
+var _bookingSeat = _interopRequireDefault(require("../../design/bookingSeat.jpg"));
+
+var _buttonContainer = _interopRequireDefault(require("./buttonContainer"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const BookSeatContainer = () => {
   const trips = (0, _reactRedux.useSelector)(state => state.trips);
+  const users = (0, _reactRedux.useSelector)(state => state.users);
+  const modal = (0, _reactRedux.useSelector)(state => state.modal);
+  console.log(users);
+  console.log(modal);
+  const dispatch = (0, _reactRedux.useDispatch)();
   const {
     date
   } = (0, _reactRouterDom.useParams)();
-  console.log(date);
-  const car = trips.find(item => Number(item.departureTime) == date);
-  return /*#__PURE__*/_react.default.createElement(_components.BookSeat, null);
+  const car = trips.find(item => Number(item.departureTime) == Number(date));
+  const seats = car?.seats.map((item, index) => /*#__PURE__*/_react.default.createElement(_components.BookSeat.Seat, {
+    key: index
+  }, item.isAvailable && !item.passengerFirstName && !item.passengerLastName ? /*#__PURE__*/_react.default.createElement("img", {
+    src: _seat.default
+  }) : !item.isAvailable && item.passengerFirstName && item.passengerLastName ? /*#__PURE__*/_react.default.createElement("img", {
+    src: _bookedSeat.default
+  }) : !item.isAvailable && /*#__PURE__*/_react.default.createElement("img", {
+    src: _bookingSeat.default
+  })));
+
+  const tripInfo = /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, "Departure Time : ", car?.departureTime), /*#__PURE__*/_react.default.createElement("div", null, "Driver : ", car?.driverName), /*#__PURE__*/_react.default.createElement("div", null, "Driver's Contact : ", car?.driverContact), /*#__PURE__*/_react.default.createElement("div", null, "Estimated duration : ", car?.estimatedDuration), /*#__PURE__*/_react.default.createElement("div", null, "Breaks : ", car?.breaks));
+
+  const destination = car?.destination;
+  const price = car?.price;
+  const buttonText = `Book .... seats`;
+  return /*#__PURE__*/_react.default.createElement(_components.BookSeat, {
+    modal: modal
+  }, /*#__PURE__*/_react.default.createElement(_components.BookSeat.Header, null, /*#__PURE__*/_react.default.createElement(_components.BookSeat.Title, null, "Book a seat to:", destination), /*#__PURE__*/_react.default.createElement(_components.BookSeat.Pannel, null, /*#__PURE__*/_react.default.createElement(_components.BookSeat.SeatContainer, null, seats), /*#__PURE__*/_react.default.createElement(_components.BookSeat.InfoContainer, null, tripInfo, /*#__PURE__*/_react.default.createElement("p", null, price, " Ar/Seat"), /*#__PURE__*/_react.default.createElement("div", {
+    onClick: () => dispatch((0, _actions.toggleModal)())
+  }, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
+    color: "#fff",
+    text: buttonText
+  }))))), /*#__PURE__*/_react.default.createElement("div", null, modal && /*#__PURE__*/_react.default.createElement(_components.BookSeat.Modal, {
+    modal: modal
+  }, /*#__PURE__*/_react.default.createElement(_components.BookSeat.ModalWarning, null, "Booking confirmed"), /*#__PURE__*/_react.default.createElement(_components.BookSeat.ModalText, null, "Thank you for trusting our services. Your bookning has been added to your account, you can review it there"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/acount"
+  }, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
+    text: "Check your account",
+    color: "#fff"
+  })))));
 };
 
 var _default = BookSeatContainer;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js"}],"src/pages/bookSeat.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js","../actions":"src/actions/index.js","./../../design/seat.jpg":"design/seat.jpg","../../design/bookedSeat.jpg":"design/bookedSeat.jpg","../../design/bookingSeat.jpg":"design/bookingSeat.jpg","./buttonContainer":"src/containers/buttonContainer.js"}],"src/pages/bookSeat.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38776,7 +38946,6 @@ const DestinationsContainer = () => {
   const trips = (0, _reactRedux.useSelector)(state => state.trips);
   const destinationsArray = trips.map(i => i.destination);
   const destinations = [...new Set(destinationsArray)];
-  console.log(destinations);
   return /*#__PURE__*/_react.default.createElement(_components.Destinations, null, /*#__PURE__*/_react.default.createElement(_components.Header.Heading, null, /*#__PURE__*/_react.default.createElement(_components.Header.Title, {
     color: "#000000"
   }, "Where are you going?"), /*#__PURE__*/_react.default.createElement(_components.Header.Image, {
@@ -38809,35 +38978,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function Home() {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_destinationsContainer.default, null));
 }
-},{"react":"node_modules/react/index.js","../containers/destinationsContainer":"src/containers/destinationsContainer.js","../containers/HeaderContiner":"src/containers/HeaderContiner.js"}],"src/containers/buttonContainer.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _components = require("../components");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const ButtonContainer = ({
-  text,
-  color,
-  disabled
-}) => {
-  return /*#__PURE__*/_react.default.createElement(_components.Button, null, /*#__PURE__*/_react.default.createElement(_components.Button.ButtonElement, {
-    disabled: disabled
-  }, /*#__PURE__*/_react.default.createElement(_components.Button.Text, {
-    color: color
-  }, text)));
-};
-
-var _default = ButtonContainer;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"src/containers/NextTripContainer.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../containers/destinationsContainer":"src/containers/destinationsContainer.js","../containers/HeaderContiner":"src/containers/HeaderContiner.js"}],"src/containers/NextTripContainer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38993,8 +39134,30 @@ function trips(state = [], action) {
   }
 }
 
+function users(state = [], action) {
+  switch (action.type) {
+    case "CHANGE_USERS":
+      return state;
+
+    default:
+      return state;
+  }
+}
+
+function modal(state = false, action) {
+  switch (action.type) {
+    case _actions.ACTIONS.toggleModal:
+      return !state;
+
+    default:
+      return state;
+  }
+}
+
 var _default = (0, _redux.combineReducers)({
-  trips
+  trips,
+  modal,
+  users
 });
 
 exports.default = _default;
@@ -39015,6 +39178,7 @@ var _reducers = _interopRequireDefault(require("./reducers"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const store = (0, _redux.createStore)(_reducers.default, (0, _redux.applyMiddleware)(_reduxThunk.default));
+console.log(store.getState());
 var _default = store;
 exports.default = _default;
 },{"redux":"node_modules/redux/es/redux.js","redux-thunk":"node_modules/redux-thunk/es/index.js","./reducers":"src/reducers/index.js"}],"src/index.js":[function(require,module,exports) {
@@ -39066,7 +39230,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50025" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55831" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

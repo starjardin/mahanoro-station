@@ -6,7 +6,6 @@ const DestinationsContainer = () => {
   const trips = useSelector(state => state.trips)
   const destinationsArray = trips.map(i => i.destination)
   const destinations = [ ...new Set(destinationsArray) ]
-  console.log(destinations);
   
   return <Destinations>
       <Header.Heading>

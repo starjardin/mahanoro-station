@@ -2,6 +2,7 @@ import { URL } from '../constant/'
 
 export const ACTIONS = {
   loadingState: "LOADIGN_STATE",
+  toggleModal: "TOGGLE_MODAL",
 }
 
 export function loadingState () {
@@ -12,5 +13,11 @@ export function loadingState () {
       dispatch({ type: ACTIONS.loadingState, payload: data })
     }
     fectchData()
+  }
+}
+
+export function toggleModal () {
+  return {
+    type: ACTIONS.toggleModal
   }
 }
