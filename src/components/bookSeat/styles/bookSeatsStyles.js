@@ -19,9 +19,18 @@ export const SeatContainer = styled.div`
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
   justify-content: flex-end;
+  > div:nth-child(1) {
+    grid-column-end: 4;
+  }
 `
 export const InfoContainer = styled.div`
-  text-align: center;
+  .info {
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem 0;
+  }
+  
+  text-align: end;
 `
 export const Modal = styled.div`
   width: 70vw;

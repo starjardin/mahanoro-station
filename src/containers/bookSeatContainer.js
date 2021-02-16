@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 
 import { BookSeat } from '../components'
+import { formatDate } from '../utils'
 import { bookSeat, bookingSeats, toggleModal } from '../actions'
 import Seat from './../../design/seat.jpg'
 import BookedSeat from '../../design/bookedSeat.jpg'
@@ -31,11 +32,28 @@ const BookSeatContainer = () => {
   )
   
   const tripInfo = <>
-    <div>Departure Time : {car?.departureTime}</div>
-    <div>Driver : {car?.driverName}</div>
-    <div>Driver's Contact : {car?.driverContact}</div>
-    <div>Estimated duration : {car?.estimatedDuration}</div>
-    <div>Breaks : {car?.breaks}</div>
+    <div className="info">
+      <span>Departure Time:</span>
+      <span>
+        { formatDate(car?.departureTime, "hh") }:00,	&nbsp;
+        { formatDate(car?.departureTime, "P") }
+      </span>
+    </div>
+    <div className="info">
+      <span>Driver :</span>
+      <span>{ car?.driverName }</span>
+    </div>
+    <div className="info">
+      <span>Driver's Contact:</span>
+      <span>{ car?.driverContact }</span>
+    </div>
+    <div className="info">
+      <span>Estimated duration</span>
+      <span>{ car?.estimatedDuration }</span>
+    </div>
+    <div className="info">
+      <span>Breaks:</span> : <span>{ car?.breaks }</span>
+    </div>
   </>
   const destination = car?.destination
   const price = car?.price
@@ -61,6 +79,7 @@ const BookSeatContainer = () => {
             text={buttonText}
           />
           </div>
+          <p>Total: {bookings?.length * car?.price }</p>
         </BookSeat.InfoContainer>
       </BookSeat.Pannel>
     </BookSeat.Header>

@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
+import { formatDate } from '../utils'
 import { NextTrip } from '../components'
 import clock from '../../design/clock.jpg'
 import ButtonContainer from './buttonContainer'
@@ -27,10 +28,15 @@ const NextTripContainer = () => {
           </NextTrip.Pane>
           <NextTrip.Pane>
             <div>
-              {item.departureTime}
+              <span>{ formatDate(item.departureTime, "cccc") }</span>
+              <span>
+                {formatDate(item.departureTime, "hh")}: 00
+              </span>
             </div>
+          </NextTrip.Pane>
+          <NextTrip.Pane>
             <div>
-              <span>{ item.departureTime }</span>
+              <span>{formatDate(item.departureTime, "P")}</span>
               <span>
                 { item.seats
                 .filter(seat => seat.isAvailable)

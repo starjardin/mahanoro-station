@@ -38453,7 +38453,7 @@ exports.Item = Item;
 const Pane = _styledComponents.default.div`
   margin: 10px;
   span {
-    display: inline-block;
+    display: block;
   }
 `;
 exports.Pane = Pane;
@@ -38639,10 +38639,19 @@ const SeatContainer = _styledComponents.default.div`
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
   justify-content: flex-end;
+  > div:nth-child(1) {
+    grid-column-end: 4;
+  }
 `;
 exports.SeatContainer = SeatContainer;
 const InfoContainer = _styledComponents.default.div`
-  text-align: center;
+  .info {
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem 0;
+  }
+  
+  text-align: end;
 `;
 exports.InfoContainer = InfoContainer;
 const Modal = _styledComponents.default.div`
@@ -57477,6 +57486,8 @@ var _reactRouterDom = require("react-router-dom");
 
 var _components = require("../components");
 
+var _utils = require("../utils");
+
 var _actions = require("../actions");
 
 var _seat = _interopRequireDefault(require("./../../design/seat.jpg"));
@@ -57508,7 +57519,17 @@ const BookSeatContainer = () => {
     onClick: () => (dispatch((0, _actions.bookingSeats)(item, id)), dispatch((0, _actions.bookSeat)(item, car)))
   }, item.isAvailable ? "true" : "False"));
 
-  const tripInfo = /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, "Departure Time : ", car?.departureTime), /*#__PURE__*/_react.default.createElement("div", null, "Driver : ", car?.driverName), /*#__PURE__*/_react.default.createElement("div", null, "Driver's Contact : ", car?.driverContact), /*#__PURE__*/_react.default.createElement("div", null, "Estimated duration : ", car?.estimatedDuration), /*#__PURE__*/_react.default.createElement("div", null, "Breaks : ", car?.breaks));
+  const tripInfo = /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "info"
+  }, /*#__PURE__*/_react.default.createElement("span", null, "Departure Time:"), /*#__PURE__*/_react.default.createElement("span", null, (0, _utils.formatDate)(car?.departureTime, "hh"), ":00, \xA0", (0, _utils.formatDate)(car?.departureTime, "P"))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "info"
+  }, /*#__PURE__*/_react.default.createElement("span", null, "Driver :"), /*#__PURE__*/_react.default.createElement("span", null, car?.driverName)), /*#__PURE__*/_react.default.createElement("div", {
+    className: "info"
+  }, /*#__PURE__*/_react.default.createElement("span", null, "Driver's Contact:"), /*#__PURE__*/_react.default.createElement("span", null, car?.driverContact)), /*#__PURE__*/_react.default.createElement("div", {
+    className: "info"
+  }, /*#__PURE__*/_react.default.createElement("span", null, "Estimated duration"), /*#__PURE__*/_react.default.createElement("span", null, car?.estimatedDuration)), /*#__PURE__*/_react.default.createElement("div", {
+    className: "info"
+  }, /*#__PURE__*/_react.default.createElement("span", null, "Breaks:"), " : ", /*#__PURE__*/_react.default.createElement("span", null, car?.breaks)));
 
   const destination = car?.destination;
   const price = car?.price;
@@ -57522,7 +57543,7 @@ const BookSeatContainer = () => {
   }, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
     color: "#fff",
     text: buttonText
-  }))))), /*#__PURE__*/_react.default.createElement("div", null, modal && /*#__PURE__*/_react.default.createElement(_components.BookSeat.Modal, {
+  })), /*#__PURE__*/_react.default.createElement("p", null, "Total: ", bookings?.length * car?.price)))), /*#__PURE__*/_react.default.createElement("div", null, modal && /*#__PURE__*/_react.default.createElement(_components.BookSeat.Modal, {
     modal: modal
   }, /*#__PURE__*/_react.default.createElement(_components.BookSeat.ModalWarning, null, /*#__PURE__*/_react.default.createElement("img", {
     src: _warning.default
@@ -57547,7 +57568,7 @@ var _default = BookSeatContainer;
  */
 
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js","../actions":"src/actions/index.js","./../../design/seat.jpg":"design/seat.jpg","../../design/bookedSeat.jpg":"design/bookedSeat.jpg","../../design/bookingSeat.jpg":"design/bookingSeat.jpg","./buttonContainer":"src/containers/buttonContainer.js","../../design/car.jpg":"design/car.jpg","../../design/warning.jpg":"design/warning.jpg"}],"src/pages/bookSeat.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js","../utils":"src/utils/index.js","../actions":"src/actions/index.js","./../../design/seat.jpg":"design/seat.jpg","../../design/bookedSeat.jpg":"design/bookedSeat.jpg","../../design/bookingSeat.jpg":"design/bookingSeat.jpg","./buttonContainer":"src/containers/buttonContainer.js","../../design/car.jpg":"design/car.jpg","../../design/warning.jpg":"design/warning.jpg"}],"src/pages/bookSeat.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57635,6 +57656,8 @@ var _reactRedux = require("react-redux");
 
 var _reactRouterDom = require("react-router-dom");
 
+var _utils = require("../utils");
+
 var _components = require("../components");
 
 var _clock = _interopRequireDefault(require("../../design/clock.jpg"));
@@ -57657,7 +57680,7 @@ const NextTripContainer = () => {
     key: item.id
   }, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Pane, null, /*#__PURE__*/_react.default.createElement("img", {
     src: _car.default
-  })), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Pane, null, /*#__PURE__*/_react.default.createElement("div", null, item.departureTime), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, item.departureTime), /*#__PURE__*/_react.default.createElement("span", null, item.seats.filter(seat => seat.isAvailable).length, " seats lefts"))), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Pane, null, item.seats.filter(seat => seat.isAvailable).length === 0 ? /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
+  })), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Pane, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, (0, _utils.formatDate)(item.departureTime, "cccc")), /*#__PURE__*/_react.default.createElement("span", null, (0, _utils.formatDate)(item.departureTime, "hh"), ": 00"))), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Pane, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, (0, _utils.formatDate)(item.departureTime, "P")), /*#__PURE__*/_react.default.createElement("span", null, item.seats.filter(seat => seat.isAvailable).length, " seats lefts"))), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Pane, null, item.seats.filter(seat => seat.isAvailable).length === 0 ? /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
     text: "Book Seat",
     color: "#fff",
     disabled: true
@@ -57671,7 +57694,7 @@ const NextTripContainer = () => {
 
 var _default = NextTripContainer;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js","../../design/clock.jpg":"design/clock.jpg","./buttonContainer":"src/containers/buttonContainer.js","../../design/car.jpg":"design/car.jpg"}],"src/pages/nextTrip.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../utils":"src/utils/index.js","../components":"src/components/index.js","../../design/clock.jpg":"design/clock.jpg","./buttonContainer":"src/containers/buttonContainer.js","../../design/car.jpg":"design/car.jpg"}],"src/pages/nextTrip.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

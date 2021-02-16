@@ -20,6 +20,6 @@ export const Item = styled.li`
 export const Pane = styled.div`
   margin: 10px;
   span {
-    display: inline-block;
+    display: block;
   }
 `
