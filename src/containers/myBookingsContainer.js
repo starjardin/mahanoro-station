@@ -9,6 +9,11 @@ const MyBookingsContainer = () => {
   const bookings = useSelector(state => state.bookings)
   const users = useSelector(state => state.users)
   const trips = useSelector(state => state.trips)
+  const { id } = useParams()
+  
+  const taxi = trips.find(i => Number(i.id) === Number(id))
+  console.log(taxi);
+  
   return <MyBookings>
     <MyBookings.Header>
       My account 	&nbsp;

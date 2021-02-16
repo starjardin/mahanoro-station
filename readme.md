@@ -25,14 +25,93 @@ The data from the trips are available on this link : https://gist.githubusercont
 
 ## Building your project
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
-
-1. Initialize your project as a public repository on [GitHub](https://github.com/). This will make it easier to share your code with the community if you need some help. If you're not sure how to do this, [have a read through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a URL. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, but I recommend you to use **Netlify**.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead how your data and reducers will look like.
 
 ## Submit your project
 
 You have until **Tuesday** at **15h30** to submit your github link and netlify link on this form : https://forms.gle/ikBWC2MokmdH4jdw6
 
 **Have fun building!** 🚀
+
+
+# Country Quiz
+
+**Icon**: https://google.github.io/material-design-icons/
+
+**API**: https://restcountries.eu/
+
+**Design** : https://www.figma.com/file/6gSAJpaedebKAUuaM4ekFR/Mahanoro-Station?node-id=4%3A38
+
+**My app** : https://tanteli-mahanoro-station.netlify.app/
+
+<h1 align="center">Mahanoro station</h1>
+
+<div align="center">
+  <h3>
+    <a href="https://tanteli-mahanoro-station.netlify.app/">
+      Demo
+    </a>
+    <span> | </span>
+    <a href="https://github.com/starjardin/mahanoro-station">
+      Solution
+    </a>
+  </h3>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+
+## Table of Contents
+
+-   [Overview](#overview)
+-   [Built With](#built-with)
+-   [How to use](#how-to-use)
+-   [Contact](#contact)
+-   [Acknowledgements](#acknowledgements)
+-   [Descrition](#acknowledgements)
+
+<!-- OVERVIEW -->
+
+## Overview
+
+-   You can see my demo in the following link 
+    <a href="https://tanteli-mahanoro-station.netlify.app/">
+      Work Demo
+    </a>. The project was fun to play with, I loved it. Although it is not perfect.
+
+-   My experience was when I was working out a big statement, I needed to break it down into as small as possible parts. It is much easier to handle it little by little. Figuring out what the app does is very important before you dive into coding.
+
+-   
+
+-   One thing I think is a wisdom that I would like to share is : it is very crucial to have a general idea about what the app is doing and start to break big problems to smaller once before diving into coding. No matter how tough it is, break the big problems down into as small parts as possible before tackling them. If you have a good base the likelyhood of having a good end is very heigh.
+
+### Built With
+
+
+-   [React](https://reactjs.org/)
+
+## How To Use
+
+<!-- Example: -->
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/your-user-name/your-project-name
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm start
+```
+## Contact
+
+-   GitHub [@starjardin](https://github.com/starjardin)
+
+## Acknowledgements
+
+<!-- This section should list any articles or add-ons/plugins that helps you to complete the project. This is optional but it will help you in the future. For example: -->
+
+## Description
+
+The main purpose of this app is for practicing redux with react. For front-end developers to boost their knowledge and their tool belt for their future. 

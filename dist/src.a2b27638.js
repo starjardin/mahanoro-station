@@ -39067,6 +39067,11 @@ const MyBookingsContainer = () => {
   const bookings = (0, _reactRedux.useSelector)(state => state.bookings);
   const users = (0, _reactRedux.useSelector)(state => state.users);
   const trips = (0, _reactRedux.useSelector)(state => state.trips);
+  const {
+    id
+  } = (0, _reactRouterDom.useParams)();
+  const taxi = trips.find(i => Number(i.id) === Number(id));
+  console.log(taxi);
   return /*#__PURE__*/_react.default.createElement(_components.MyBookings, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Header, null, "My account  \xA0", /*#__PURE__*/_react.default.createElement("span", null, users.firstName, " ", users.lastName)), /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListContainer, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListItem, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("img", {
     src: _car.default,
     alt: "car"
@@ -39576,7 +39581,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55831" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59664" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
