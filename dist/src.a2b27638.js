@@ -36283,19 +36283,21 @@ function loadingState() {
   };
 }
 
-function bookSeat(item, car) {
+function bookSeat(item, car, users) {
   return {
     type: ACTIONS.bookSeat,
     payload: item,
-    car: car
+    car: car,
+    users: users
   };
 }
 
-function bookingSeats(item, id) {
+function bookingSeats(item, id, users) {
   return {
     type: ACTIONS.bookings,
     payload: item,
-    id: id
+    id: id,
+    users: users
   };
 }
 
@@ -38715,6 +38717,12 @@ const ModalText = _styledComponents.default.p`
 exports.ModalText = ModalText;
 const Seat = _styledComponents.default.div`
   cursor: pointer;
+  ${({
+  disabled
+}) => disabled && `
+    pointer-events: none;
+    cursor: not-allowed;
+  `}
 `;
 exports.Seat = Seat;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/bookSeat/index.js":[function(require,module,exports) {
@@ -57481,7 +57489,7 @@ function AccountContainer() {
     placeholder: users.lastName
   }), /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "Phone Number"), /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
     type: "phone",
-    placeholder: users.userPhoneNumber
+    placeholder: users.phoneNumber
   }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
     type: "submit",
     text: "update",
@@ -57559,8 +57567,16 @@ const BookSeatContainer = () => {
   const car = trips.find(item => Number(item.id) == Number(id));
   const seats = car?.seats.map((item, index) => /*#__PURE__*/_react.default.createElement(_components.BookSeat.Seat, {
     key: index,
-    onClick: () => (dispatch((0, _actions.bookingSeats)(item, id)), dispatch((0, _actions.bookSeat)(item, car)), console.log(!item.isAvailable))
-  }, item.isAvailable ? "true" : "False"));
+    disabled: !item.isAvailable && !item.passengerFirstName && !item.passengerLastName,
+    onClick: () => (console.log(item), dispatch((0, _actions.bookingSeats)(item, id, users)), dispatch((0, _actions.bookSeat)(item, car, users)))
+  }, item.isAvailable && !item.passengerFirstName && !item.passengerLastName ? /*#__PURE__*/_react.default.createElement("img", {
+    src: _seat.default
+  }) : item.isAvailable && item.passengerFirstName ? /*#__PURE__*/_react.default.createElement("img", {
+    src: _bookingSeat.default
+  }) : !item.isAvailable && !item.passengerFirstName && !item.passengerLastName && /*#__PURE__*/_react.default.createElement("img", {
+    src: _bookedSeat.default,
+    disabled: true
+  })));
 
   const tripInfo = /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "info"
@@ -57600,16 +57616,6 @@ const BookSeatContainer = () => {
 };
 
 var _default = BookSeatContainer;
-/*
-
-{item.isAvailable && !item.passengerFirstName && !item.passengerLastName
-        ? <img src={ Seat } />
-        : !item.isAvailable && item.passengerFirstName && item.passengerLastName ?
-          <img src={ BookedSeat } /> :
-        !item.isAvailable && <img src={BookingSeat} />
-      }
- */
-
 exports.default = _default;
 },{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js","../utils":"src/utils/index.js","../actions":"src/actions/index.js","./../../design/seat.jpg":"design/seat.jpg","../../design/bookedSeat.jpg":"design/bookedSeat.jpg","../../design/bookingSeat.jpg":"design/bookingSeat.jpg","./buttonContainer":"src/containers/buttonContainer.js","../../design/car.jpg":"design/car.jpg","../../design/warning.jpg":"design/warning.jpg"}],"src/pages/bookSeat.js":[function(require,module,exports) {
 "use strict";
@@ -57794,9 +57800,9 @@ function App() {
     exact: true,
     path: "/"
   }, /*#__PURE__*/_react.default.createElement(_home.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
-    exact: true,
-    exact: true,
     path: "/account/:id"
+  }, /*#__PURE__*/_react.default.createElement(_account.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    path: "/account"
   }, /*#__PURE__*/_react.default.createElement(_account.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/destination/:destination"
@@ -57847,7 +57853,7 @@ var _actions = require("../actions");
 const initialStateUser = {
   firstName: "Honey",
   lastName: "Tantely",
-  userPhoneNumber: "+261349789355",
+  phoneNumber: "+261349789355",
   id: 261349789355
 };
 
@@ -57860,21 +57866,28 @@ function trips(state = [], action) {
 
     case _actions.ACTIONS.bookSeat:
       {
-        //const newArr = state.map(item => {
-        //  if (item.id === action.car.id) {
-        //    item.seats.map(i => {
-        //      if (i.id === action.payload.id) {
-        //        return {
-        //          ...i,
-        //          isAvailable: !i.isAvailable
-        //        }
-        //      }
-        //      return i
-        //    })
-        //  }
-        //  return item
-        //})
-        return state;
+        console.log(action.users);
+        const arr = action.car.seats.map(i => {
+          if (i.id === action.payload.id) {
+            console.log(i);
+            return { ...i,
+              isAvailable: !i.isAvailable,
+              passengerFirstName: action.users.firstName
+            };
+          }
+
+          return i;
+        });
+        const newArr = state.map(item => {
+          if (item.id === action.car.id) {
+            return { ...item,
+              seats: arr
+            };
+          }
+
+          return item;
+        });
+        return newArr;
       }
 
     default:

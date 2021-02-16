@@ -77,4 +77,8 @@ export const ModalText = styled.p`
 
 export const Seat = styled.div`
   cursor: pointer;
+  ${({ disabled }) => disabled && `
+    pointer-events: none;
+    cursor: not-allowed;
+  `}
 `

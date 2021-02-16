@@ -23,7 +23,10 @@ export default function App () {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact exact path="/account/:id">
+        <Route path="/account/:id">
+          <Account />
+        </Route>
+        <Route path="/account">
           <Account />
         </Route>
         <Route exact path="/destination/:destination">

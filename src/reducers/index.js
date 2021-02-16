@@ -4,7 +4,7 @@ import { ACTIONS } from '../actions'
 const initialStateUser = {
   firstName: "Honey",
   lastName: "Tantely",
-  userPhoneNumber: "+261349789355",
+  phoneNumber: "+261349789355",
   id: 261349789355
 }
 
@@ -14,21 +14,29 @@ function trips (state = [], action) {
       return action.payload
     }
     case ACTIONS.bookSeat: {
-      //const newArr = state.map(item => {
-      //  if (item.id === action.car.id) {
-      //    item.seats.map(i => {
-      //      if (i.id === action.payload.id) {
-      //        return {
-      //          ...i,
-      //          isAvailable: !i.isAvailable
-      //        }
-      //      }
-      //      return i
-      //    })
-      //  }
-      //  return item
-      //})
-      return state
+      console.log(action.users);
+      const arr = action.car.seats.map(i => {
+        if (i.id === action.payload.id) {
+          console.log(i);
+          return {
+            ...i,
+            isAvailable: !i.isAvailable,
+            passengerFirstName: action.users.firstName
+            
+          }
+        }
+        return i
+      })
+      const newArr = state.map(item => {
+        if (item.id === action.car.id) {
+          return {
+            ...item,
+            seats : arr
+          }
+        }
+        return item
+      })
+      return newArr
     }
     default: return state
   }

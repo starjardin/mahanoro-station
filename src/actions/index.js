@@ -18,19 +18,21 @@ export function loadingState () {
   }
 }
 
-export function bookSeat (item, car) {
+export function bookSeat (item, car, users) {
   return {
     type: ACTIONS.bookSeat,
     payload: item,
-    car: car
+    car: car,
+    users: users
   }
 }
 
-export function bookingSeats (item, id) {
+export function bookingSeats (item, id, users) {
   return {
     type: ACTIONS.bookings,
     payload: item,
-    id: id
+    id: id,
+    users: users
   }
 }
 

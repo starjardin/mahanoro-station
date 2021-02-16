@@ -24,7 +24,7 @@ export default function AccountContainer () {
       <Account.Label>Phone Number</Account.Label>
       <Account.Input
         type="phone"
-        placeholder={users.userPhoneNumber}
+        placeholder={users.phoneNumber}
       />
       <div>
         <ButtonContainer type="submit" text="update" color="#fff" />
