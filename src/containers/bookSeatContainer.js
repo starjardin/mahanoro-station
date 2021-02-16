@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 
 import { BookSeat } from '../components'
-import { bookSeat } from '../actions'
-import { toggleModal } from '../actions'
+import { bookSeat, bookingSeats, toggleModal } from '../actions'
 import Seat from './../../design/seat.jpg'
 import BookedSeat from '../../design/bookedSeat.jpg'
 import BookingSeat from '../../design/bookingSeat.jpg'
@@ -23,13 +22,11 @@ const BookSeatContainer = () => {
   const { id } = useParams()
   const car = trips.find(item => Number(item.id) == Number(id))
   const seats = car?.seats.map((item, index) => (
-    <BookSeat.Seat key={index} onClick={() => dispatch(bookSeat(item, id))}>
-      {item.isAvailable && !item.passengerFirstName && !item.passengerLastName
-        ? <img src={ Seat } />
-        : !item.isAvailable && item.passengerFirstName && item.passengerLastName ?
-          <img src={ BookedSeat } /> :
-        !item.isAvailable && <img src={BookingSeat} />
-      }
+    <BookSeat.Seat key={ index } onClick={ () => (
+      dispatch(bookingSeats(item, id)),
+      dispatch(bookSeat(item, car))
+    ) }>
+      {item.isAvailable ? "true" : "False"}
     </BookSeat.Seat>)
   )
   
@@ -73,7 +70,10 @@ const BookSeatContainer = () => {
           <img src={ warning } /> Booking confirmed
         </BookSeat.ModalWarning>
         <BookSeat.ModalText>Thank you for trusting our services. Your bookning has been added to your account, you can review it there</BookSeat.ModalText>
-        <Link to={`/account/${car.id}`}>
+        <Link
+          to={ `/account/${ car.id }` }
+          onClick={ () => dispatch(toggleModal()) }
+        >
           <ButtonContainer
             text="Check your account"
             color="#fff"
@@ -85,3 +85,14 @@ const BookSeatContainer = () => {
 }
 
 export default BookSeatContainer
+
+
+/*
+
+{item.isAvailable && !item.passengerFirstName && !item.passengerLastName
+        ? <img src={ Seat } />
+        : !item.isAvailable && item.passengerFirstName && item.passengerLastName ?
+          <img src={ BookedSeat } /> :
+        !item.isAvailable && <img src={BookingSeat} />
+      }
+ */

@@ -13,6 +13,24 @@ function trips (state = [], action) {
     case ACTIONS.loadingState: {
       return action.payload
     }
+    case ACTIONS.bookSeat: {
+      const newArr = state.map(item => {
+        if (item.id === action.car.id) {
+          item.seats.map(i => {
+            if (i.id === action.payload.id) {
+              return {
+                ...i,
+                isAvailable: !i.isAvailable
+              }
+            }
+            return i
+          })
+        }                 
+        return item
+      })
+      console.log(newArr);
+      return newArr
+    }
     default: return state
   }
 }
@@ -34,7 +52,7 @@ function modal (state=false, action) {
 
 function bookings (state=[], action) {
   switch (action.type) {
-    case ACTIONS.bookSeat: {
+    case ACTIONS.bookings: {
       return [...state, action.payload]
     }
     default: return state

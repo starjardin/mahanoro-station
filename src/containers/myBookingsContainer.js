@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 
 import { MyBookings } from '../components'
 import car from '../../design/car.jpg'
+import ButtonContainer from './buttonContainer'
+import { formatDate } from '../utils'
 
 const MyBookingsContainer = () => {
   const bookings = useSelector(state => state.bookings)
@@ -11,8 +13,12 @@ const MyBookingsContainer = () => {
   const trips = useSelector(state => state.trips)
   const { id } = useParams()
   
-  const taxi = trips.find(i => Number(i.id) === Number(id))
-  console.log(taxi);
+  
+  const taxi = trips.find(item => Number(item.id) == Number(id))
+  const destination = taxi?.destination
+  const price = taxi?.price * bookings.length
+  const time = taxi?.departureTime
+  const seatsOnBooking = bookings.length > 1 ? bookings.length + ` seats` : bookings.length + ` seat`
   
   return <MyBookings>
     <MyBookings.Header>
@@ -25,10 +31,25 @@ const MyBookingsContainer = () => {
           <img src={car} alt="car" />
         </MyBookings.Pane>
         <MyBookings.Pane>
-          
+          <div>
+            {destination}
+          </div>
+          <div>
+            {formatDate(time, "P")}, &nbsp;
+            {formatDate(time, "hh")}: 00
+          </div>
         </MyBookings.Pane>
-        <MyBookings.Pane></MyBookings.Pane>
-        <MyBookings.Pane></MyBookings.Pane>
+        <MyBookings.Pane>
+          <span>
+            {seatsOnBooking}
+          </span>
+          <span>
+            {price} Ar
+          </span>
+        </MyBookings.Pane>
+        <MyBookings.Pane>
+          <ButtonContainer text="cancel" color="#fff" type="button"/>
+        </MyBookings.Pane>
       </MyBookings.ListItem>
     </MyBookings.ListContainer>
   </MyBookings>

@@ -3,7 +3,8 @@ import { URL } from '../constant/'
 export const ACTIONS = {
   loadingState: "LOADIGN_STATE",
   toggleModal: "TOGGLE_MODAL",
-  bookSeat: "BOOK_SEAT"
+  bookSeat: "BOOK_SEAT",
+  bookings: "BOOKINGS"
 }
 
 export function loadingState () {
@@ -17,9 +18,17 @@ export function loadingState () {
   }
 }
 
-export function bookSeat (item, id) {
+export function bookSeat (item, car) {
   return {
     type: ACTIONS.bookSeat,
+    payload: item,
+    car: car
+  }
+}
+
+export function bookingSeats (item, id) {
+  return {
+    type: ACTIONS.bookings,
     payload: item,
     id: id
   }
