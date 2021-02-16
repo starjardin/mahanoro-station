@@ -57437,6 +57437,7 @@ const MyBookingsContainer = () => {
   const {
     id
   } = (0, _reactRouterDom.useParams)();
+  console.log(bookings);
   const taxi = trips.find(item => Number(item.id) == Number(id));
   const destination = taxi?.destination;
   const price = taxi?.price * bookings.length;
@@ -57568,10 +57569,10 @@ const BookSeatContainer = () => {
   const seats = car?.seats.map((item, index) => /*#__PURE__*/_react.default.createElement(_components.BookSeat.Seat, {
     key: index,
     disabled: !item.isAvailable && !item.passengerFirstName && !item.passengerLastName,
-    onClick: () => (console.log(item), dispatch((0, _actions.bookingSeats)(item, id, users)), dispatch((0, _actions.bookSeat)(item, car, users)))
+    onClick: () => (dispatch((0, _actions.bookingSeats)(item, id, users)), dispatch((0, _actions.bookSeat)(item, car, users)))
   }, item.isAvailable && !item.passengerFirstName && !item.passengerLastName ? /*#__PURE__*/_react.default.createElement("img", {
     src: _seat.default
-  }) : item.isAvailable && item.passengerFirstName ? /*#__PURE__*/_react.default.createElement("img", {
+  }) : !item.isAvailable && item.passengerFirstName ? /*#__PURE__*/_react.default.createElement("img", {
     src: _bookingSeat.default
   }) : !item.isAvailable && !item.passengerFirstName && !item.passengerLastName && /*#__PURE__*/_react.default.createElement("img", {
     src: _bookedSeat.default,
@@ -57869,15 +57870,15 @@ function trips(state = [], action) {
         console.log(action.users);
         const arr = action.car.seats.map(i => {
           if (i.id === action.payload.id) {
-            console.log(i);
             return { ...i,
               isAvailable: !i.isAvailable,
-              passengerFirstName: action.users.firstName
+              passengerFirstName: i.isAvailable ? action.users.firstName : ""
             };
           }
 
           return i;
         });
+        console.log(arr);
         const newArr = state.map(item => {
           if (item.id === action.car.id) {
             return { ...item,

@@ -13,6 +13,7 @@ const MyBookingsContainer = () => {
   const trips = useSelector(state => state.trips)
   const { id } = useParams()
   
+  console.log(bookings);
   
   const taxi = trips.find(item => Number(item.id) == Number(id))
   const destination = taxi?.destination

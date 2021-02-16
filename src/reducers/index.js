@@ -17,16 +17,16 @@ function trips (state = [], action) {
       console.log(action.users);
       const arr = action.car.seats.map(i => {
         if (i.id === action.payload.id) {
-          console.log(i);
           return {
             ...i,
             isAvailable: !i.isAvailable,
-            passengerFirstName: action.users.firstName
+            passengerFirstName: i.isAvailable ? action.users.firstName : "",
             
           }
         }
         return i
       })
+      console.log(arr);
       const newArr = state.map(item => {
         if (item.id === action.car.id) {
           return {

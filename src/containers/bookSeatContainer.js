@@ -26,14 +26,13 @@ const BookSeatContainer = () => {
     <BookSeat.Seat key={ index }
       disabled={!item.isAvailable && !item.passengerFirstName && !item.passengerLastName}
       onClick={ () => (
-        console.log(item),
         dispatch(bookingSeats(item, id, users)),
         dispatch(bookSeat(item, car, users))
       )
     }>
       {item.isAvailable && !item.passengerFirstName && !item.passengerLastName
         ? <img src={ Seat } />
-        : item.isAvailable && item.passengerFirstName ?
+        : !item.isAvailable && item.passengerFirstName ?
           <img src={ BookingSeat } /> :
           !item.isAvailable && !item.passengerFirstName && !item.passengerLastName && <img src={ BookedSeat } disabled />
       }
