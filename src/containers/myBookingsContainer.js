@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { MyBookings } from '../components'
 import car from '../../design/car.jpg'
@@ -25,7 +25,9 @@ const MyBookingsContainer = () => {
       My account 	&nbsp;
       <span>{ users.firstName } { users.lastName }</span>
     </MyBookings.Header>
-    <MyBookings.ListContainer>
+    {
+      bookings?.length > 0
+      ? <MyBookings.ListContainer>
       <MyBookings.ListItem>
         <MyBookings.Pane>
           <img src={car} alt="car" />
@@ -51,7 +53,14 @@ const MyBookingsContainer = () => {
           <ButtonContainer text="cancel" color="#fff" type="button"/>
         </MyBookings.Pane>
       </MyBookings.ListItem>
-    </MyBookings.ListContainer>
+        </MyBookings.ListContainer>
+        : <Link to='/'>
+          <ButtonContainer
+            text="Want to book seats"
+            color="#FFF"
+          />
+        </Link>
+    }
   </MyBookings>
 }
 

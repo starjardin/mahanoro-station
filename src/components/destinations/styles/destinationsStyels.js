@@ -5,7 +5,7 @@ export const Container = styled.div`
 `
 export const ListContainer = styled.ul`
   display: grid;
-  grid-template-columns : repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns : repeat(auto-fill, minmax(430px, 1fr));
   column-gap: 2rem;
   row-gap: 1rem;
   padding: 0;
@@ -13,7 +13,6 @@ export const ListContainer = styled.ul`
 `
 export const Item = styled.li`
   list-style: none;
-  background-color: #0F0E17;
   color: #ffffff;
   text-transform: uppercase;
   padding: 1.3rem;
@@ -21,12 +20,17 @@ export const Item = styled.li`
   cursor: pointer;
 `
 export const Link = styled.p`
+  margin: 0;
   a {
     color: #ffffff;
     text-decoration: none;
-    display: inline-block;
+    display: block;
     padding-inline-start: 3rem;
     text-align: start;
+    cursor: pointer;
+    background-color: #0F0E17;
+    margin: 2px;
+    padding: 1rem;
     cursor: pointer;
   }
 `

@@ -4,8 +4,8 @@ export const Container = styled.div`
   ${({ modal }) => modal && `
     background-color: #fefefefe;
     opacity: .2;
-    width: 100vw;
-    height: 100vh;
+    width: 90vw;
+    height: 90vh;
   `}
 `
 export const Header = styled.header``
@@ -13,7 +13,12 @@ export const Pannel = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 `
-export const Title = styled.h2``
+export const Title = styled.h2`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+`
 export const SeatContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -43,19 +48,31 @@ export const Modal = styled.div`
   transform: translate(-50%, -50%);
   text-align: center;
   z-index: 3;
-  opacity: 1;
+  opacity: 0.9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fefefefe;
 `
 export const ModalWarning = styled.h2`
   text-transform: uppercase;
-  text-align: center;
   opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 45vw;
+  text-align: start;
+  padding: 2rem 0;
+  gap: 1.5rem;
 `
 export const ModalText = styled.p`
   color: #000;
   opacity: 1;
   width: 45vw;
-  text-align: center;
-  
+  text-align: start;
+  margin: 0 0 2rem 0;
 `
 
 export const Seat = styled.div`

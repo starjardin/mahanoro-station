@@ -8,7 +8,9 @@ import MyBookingsContainer from './myBookingsContainer'
 export default function AccountContainer () {
   const users = useSelector(state => state.users)
   return <Account>
-    <Account.Form>
+    <div>
+      <h2>My personal information: </h2>
+      <Account.Form>
       <Account.Label>First Name</Account.Label>
       <Account.Input
         type="text"
@@ -24,8 +26,14 @@ export default function AccountContainer () {
         type="phone"
         placeholder={users.userPhoneNumber}
       />
-      <ButtonContainer type="submit" text="update" color="#fff" />
+      <div>
+        <ButtonContainer type="submit" text="update" color="#fff" />
+      </div>
     </Account.Form>
-    <MyBookingsContainer />
+    </div>
+    <div>
+      <h2>My Bookings</h2>
+      <MyBookingsContainer />
+    </div>
   </Account>
 }

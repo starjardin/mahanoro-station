@@ -8,11 +8,18 @@ export const Container = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
+  > div {
+    padding: 2rem 0;
+    text-align: right;
+    width: 100%;
+  }
 `
 export const Input = styled.input`
   display: block;
-  padding: .6rem 1rem;
+  padding: .8rem 0 .8rem 1rem;
+  width: 90%;
+  margin: auto;
   text-transform: capitalize;
   background-color: #000000;
   color: #FF8906;

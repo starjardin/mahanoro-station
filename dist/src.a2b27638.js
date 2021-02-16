@@ -38342,7 +38342,7 @@ const Container = _styledComponents.default.div`
 exports.Container = Container;
 const ListContainer = _styledComponents.default.ul`
   display: grid;
-  grid-template-columns : repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns : repeat(auto-fill, minmax(430px, 1fr));
   column-gap: 2rem;
   row-gap: 1rem;
   padding: 0;
@@ -38351,7 +38351,6 @@ const ListContainer = _styledComponents.default.ul`
 exports.ListContainer = ListContainer;
 const Item = _styledComponents.default.li`
   list-style: none;
-  background-color: #0F0E17;
   color: #ffffff;
   text-transform: uppercase;
   padding: 1.3rem;
@@ -38360,12 +38359,17 @@ const Item = _styledComponents.default.li`
 `;
 exports.Item = Item;
 const Link = _styledComponents.default.p`
+  margin: 0;
   a {
     color: #ffffff;
     text-decoration: none;
-    display: inline-block;
+    display: block;
     padding-inline-start: 3rem;
     text-align: start;
+    cursor: pointer;
+    background-color: #0F0E17;
+    margin: 2px;
+    padding: 1rem;
     cursor: pointer;
   }
 `;
@@ -38435,9 +38439,19 @@ const Container = _styledComponents.default.div``;
 exports.Container = Container;
 const Link = _styledComponents.default.div``;
 exports.Link = Link;
-const Header = _styledComponents.default.header``;
+const Header = _styledComponents.default.header`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
 exports.Header = Header;
-const Title = _styledComponents.default.h2``;
+const Title = _styledComponents.default.h2`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
 exports.Title = Title;
 const ListContainer = _styledComponents.default.ul`
   padding: 0;
@@ -38620,8 +38634,8 @@ const Container = _styledComponents.default.div`
 }) => modal && `
     background-color: #fefefefe;
     opacity: .2;
-    width: 100vw;
-    height: 100vh;
+    width: 90vw;
+    height: 90vh;
   `}
 `;
 exports.Container = Container;
@@ -38632,7 +38646,12 @@ const Pannel = _styledComponents.default.div`
   grid-template-columns: repeat(2, 1fr);
 `;
 exports.Pannel = Pannel;
-const Title = _styledComponents.default.h2``;
+const Title = _styledComponents.default.h2`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+`;
 exports.Title = Title;
 const SeatContainer = _styledComponents.default.div`
   display: grid;
@@ -38665,21 +38684,33 @@ const Modal = _styledComponents.default.div`
   transform: translate(-50%, -50%);
   text-align: center;
   z-index: 3;
-  opacity: 1;
+  opacity: 0.9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fefefefe;
 `;
 exports.Modal = Modal;
 const ModalWarning = _styledComponents.default.h2`
   text-transform: uppercase;
-  text-align: center;
   opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 45vw;
+  text-align: start;
+  padding: 2rem 0;
+  gap: 1.5rem;
 `;
 exports.ModalWarning = ModalWarning;
 const ModalText = _styledComponents.default.p`
   color: #000;
   opacity: 1;
   width: 45vw;
-  text-align: center;
-  
+  text-align: start;
+  margin: 0 0 2rem 0;
 `;
 exports.ModalText = ModalText;
 const Seat = _styledComponents.default.div`
@@ -38793,12 +38824,19 @@ exports.Container = Container;
 const Form = _styledComponents.default.form`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
+  > div {
+    padding: 2rem 0;
+    text-align: right;
+    width: 100%;
+  }
 `;
 exports.Form = Form;
 const Input = _styledComponents.default.input`
   display: block;
-  padding: .6rem 1rem;
+  padding: .8rem 0 .8rem 1rem;
+  width: 90%;
+  margin: auto;
   text-transform: capitalize;
   background-color: #000000;
   color: #FF8906;
@@ -57396,14 +57434,19 @@ const MyBookingsContainer = () => {
   const price = taxi?.price * bookings.length;
   const time = taxi?.departureTime;
   const seatsOnBooking = bookings.length > 1 ? bookings.length + ` seats` : bookings.length + ` seat`;
-  return /*#__PURE__*/_react.default.createElement(_components.MyBookings, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Header, null, "My account  \xA0", /*#__PURE__*/_react.default.createElement("span", null, users.firstName, " ", users.lastName)), /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListContainer, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListItem, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("img", {
+  return /*#__PURE__*/_react.default.createElement(_components.MyBookings, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Header, null, "My account  \xA0", /*#__PURE__*/_react.default.createElement("span", null, users.firstName, " ", users.lastName)), bookings?.length > 0 ? /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListContainer, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListItem, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("img", {
     src: _car.default,
     alt: "car"
   })), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("div", null, destination), /*#__PURE__*/_react.default.createElement("div", null, (0, _utils.formatDate)(time, "P"), ", \xA0", (0, _utils.formatDate)(time, "hh"), ": 00")), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("span", null, seatsOnBooking), /*#__PURE__*/_react.default.createElement("span", null, price, " Ar")), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
     text: "cancel",
     color: "#fff",
     type: "button"
-  })))));
+  })))) : /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/"
+  }, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
+    text: "Want to book seats",
+    color: "#FFF"
+  })));
 };
 
 var _default = MyBookingsContainer;
@@ -57430,7 +57473,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function AccountContainer() {
   const users = (0, _reactRedux.useSelector)(state => state.users);
-  return /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Form, null, /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "First Name"), /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
+  return /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "My personal information: "), /*#__PURE__*/_react.default.createElement(_components.Account.Form, null, /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "First Name"), /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
     type: "text",
     placeholder: users.firstName
   }), /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "Last Name"), /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
@@ -57439,11 +57482,11 @@ function AccountContainer() {
   }), /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "Phone Number"), /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
     type: "phone",
     placeholder: users.userPhoneNumber
-  }), /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
     type: "submit",
     text: "update",
     color: "#fff"
-  })), /*#__PURE__*/_react.default.createElement(_myBookingsContainer.default, null));
+  })))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "My Bookings"), /*#__PURE__*/_react.default.createElement(_myBookingsContainer.default, null)));
 }
 },{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../components":"src/components/index.js","./buttonContainer":"src/containers/buttonContainer.js","./myBookingsContainer":"src/containers/myBookingsContainer.js"}],"src/pages/account.js":[function(require,module,exports) {
 "use strict";
@@ -57516,7 +57559,7 @@ const BookSeatContainer = () => {
   const car = trips.find(item => Number(item.id) == Number(id));
   const seats = car?.seats.map((item, index) => /*#__PURE__*/_react.default.createElement(_components.BookSeat.Seat, {
     key: index,
-    onClick: () => (dispatch((0, _actions.bookingSeats)(item, id)), dispatch((0, _actions.bookSeat)(item, car)))
+    onClick: () => (dispatch((0, _actions.bookingSeats)(item, id)), dispatch((0, _actions.bookSeat)(item, car)), console.log(!item.isAvailable))
   }, item.isAvailable ? "true" : "False"));
 
   const tripInfo = /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
@@ -57538,7 +57581,7 @@ const BookSeatContainer = () => {
     modal: modal
   }, /*#__PURE__*/_react.default.createElement(_components.BookSeat.Header, null, /*#__PURE__*/_react.default.createElement(_components.BookSeat.Title, null, /*#__PURE__*/_react.default.createElement("img", {
     src: _car.default
-  }), "Book a seat to:", destination), /*#__PURE__*/_react.default.createElement(_components.BookSeat.Pannel, null, /*#__PURE__*/_react.default.createElement(_components.BookSeat.SeatContainer, null, seats), /*#__PURE__*/_react.default.createElement(_components.BookSeat.InfoContainer, null, tripInfo, /*#__PURE__*/_react.default.createElement("p", null, price, " Ar/Seat"), /*#__PURE__*/_react.default.createElement("div", {
+  }), /*#__PURE__*/_react.default.createElement("span", null, "Book a seat to: ", /*#__PURE__*/_react.default.createElement("br", null), destination)), /*#__PURE__*/_react.default.createElement(_components.BookSeat.Pannel, null, /*#__PURE__*/_react.default.createElement(_components.BookSeat.SeatContainer, null, seats), /*#__PURE__*/_react.default.createElement(_components.BookSeat.InfoContainer, null, tripInfo, /*#__PURE__*/_react.default.createElement("p", null, price, " Ar/Seat"), /*#__PURE__*/_react.default.createElement("div", {
     onClick: () => dispatch((0, _actions.toggleModal)())
   }, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
     color: "#fff",
@@ -57614,11 +57657,10 @@ const DestinationsContainer = () => {
     color: "#000000"
   }, "Where are you going?"), /*#__PURE__*/_react.default.createElement(_components.Header.Image, {
     src: _car.default
-  })), /*#__PURE__*/_react.default.createElement(_components.Destinations.ListContainer, null, destinations.map((item, index) => /*#__PURE__*/_react.default.createElement(_components.Destinations.Item, {
-    key: index
-  }, /*#__PURE__*/_react.default.createElement(_components.Destinations.Link, {
+  })), /*#__PURE__*/_react.default.createElement(_components.Destinations.ListContainer, null, destinations.map((item, index) => /*#__PURE__*/_react.default.createElement(_components.Destinations.Link, {
+    key: index,
     to: `/destination/${item}`
-  }, item)))));
+  }, /*#__PURE__*/_react.default.createElement(_components.Destinations.Item, null, item)))));
 };
 
 var _default = DestinationsContainer;
@@ -57676,7 +57718,7 @@ const NextTripContainer = () => {
   const availabeNextTrip = trips.filter(item => item.destination === destination);
   return /*#__PURE__*/_react.default.createElement(_components.NextTrip, null, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Header, null, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Title, null, /*#__PURE__*/_react.default.createElement("img", {
     src: _clock.default
-  }), "Next trip to: ", destination)), /*#__PURE__*/_react.default.createElement(_components.NextTrip.ListContainer, null, availabeNextTrip.map(item => /*#__PURE__*/_react.default.createElement(_components.NextTrip.Item, {
+  }), /*#__PURE__*/_react.default.createElement("span", null, "Next trip to: ", /*#__PURE__*/_react.default.createElement("br", null), destination))), /*#__PURE__*/_react.default.createElement(_components.NextTrip.ListContainer, null, availabeNextTrip.map(item => /*#__PURE__*/_react.default.createElement(_components.NextTrip.Item, {
     key: item.id
   }, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Pane, null, /*#__PURE__*/_react.default.createElement("img", {
     src: _car.default
@@ -57818,23 +57860,21 @@ function trips(state = [], action) {
 
     case _actions.ACTIONS.bookSeat:
       {
-        const newArr = state.map(item => {
-          if (item.id === action.car.id) {
-            item.seats.map(i => {
-              if (i.id === action.payload.id) {
-                return { ...i,
-                  isAvailable: !i.isAvailable
-                };
-              }
-
-              return i;
-            });
-          }
-
-          return item;
-        });
-        console.log(newArr);
-        return newArr;
+        //const newArr = state.map(item => {
+        //  if (item.id === action.car.id) {
+        //    item.seats.map(i => {
+        //      if (i.id === action.payload.id) {
+        //        return {
+        //          ...i,
+        //          isAvailable: !i.isAvailable
+        //        }
+        //      }
+        //      return i
+        //    })
+        //  }
+        //  return item
+        //})
+        return state;
       }
 
     default:

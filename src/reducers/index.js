@@ -14,22 +14,21 @@ function trips (state = [], action) {
       return action.payload
     }
     case ACTIONS.bookSeat: {
-      const newArr = state.map(item => {
-        if (item.id === action.car.id) {
-          item.seats.map(i => {
-            if (i.id === action.payload.id) {
-              return {
-                ...i,
-                isAvailable: !i.isAvailable
-              }
-            }
-            return i
-          })
-        }                 
-        return item
-      })
-      console.log(newArr);
-      return newArr
+      //const newArr = state.map(item => {
+      //  if (item.id === action.car.id) {
+      //    item.seats.map(i => {
+      //      if (i.id === action.payload.id) {
+      //        return {
+      //          ...i,
+      //          isAvailable: !i.isAvailable
+      //        }
+      //      }
+      //      return i
+      //    })
+      //  }
+      //  return item
+      //})
+      return state
     }
     default: return state
   }

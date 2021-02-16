@@ -4,9 +4,19 @@ export const Container = styled.div``
 
 export const Link = styled.div``
 
-export const Header = styled.header``
+export const Header = styled.header`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`
 
-export const Title = styled.h2``
+export const Title = styled.h2`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`
 
 export const ListContainer = styled.ul`
   padding: 0;

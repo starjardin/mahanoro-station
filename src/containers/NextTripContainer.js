@@ -17,7 +17,7 @@ const NextTripContainer = () => {
     <NextTrip.Header>
       <NextTrip.Title>
         <img src={clock} />
-        Next trip to: {destination}
+        <span>Next trip to: <br/>{destination}</span>
       </NextTrip.Title>
     </NextTrip.Header>
     <NextTrip.ListContainer>

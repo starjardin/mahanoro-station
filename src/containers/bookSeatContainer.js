@@ -25,7 +25,8 @@ const BookSeatContainer = () => {
   const seats = car?.seats.map((item, index) => (
     <BookSeat.Seat key={ index } onClick={ () => (
       dispatch(bookingSeats(item, id)),
-      dispatch(bookSeat(item, car))
+      dispatch(bookSeat(item, car)),
+      console.log(!item.isAvailable)
     ) }>
       {item.isAvailable ? "true" : "False"}
     </BookSeat.Seat>)
@@ -63,8 +64,7 @@ const BookSeatContainer = () => {
     <BookSeat.Header>
       <BookSeat.Title>
         <img src={carImage} />
-        Book a seat to:
-         { destination }
+        <span>Book a seat to: <br />{ destination }</span>
       </BookSeat.Title>
       <BookSeat.Pannel>
         <BookSeat.SeatContainer>{seats}</BookSeat.SeatContainer>
