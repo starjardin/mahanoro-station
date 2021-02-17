@@ -67,7 +67,7 @@ The data from the trips are available on this link : https://gist.githubusercont
 
 -   This project was fun to play with. It's a big one but I liked it. Some of the features are not accomplished, however, some are ok. To be direct the app is not fully completed. The cancel button is still not working properly.
 
--  If I had more time, I would fix the cancel buttons and also when I update the bookings it should lead me to the seats page, wheras it stays on the account page, so I definetely would improve that issue.
+-  If I had more time, I would fix the cancel buttons, I can only cancel one city and after that i won't work, and also when I update the bookings it should lead me to the seats page, wheras it stays on the account page, so I definetely would improve that issue.
 
 -   My experience was, when I was working on a big statement, I needed to break it down into as small as possible parts, I found that detailing is really hard. It is much easier to handle it little by little. One tip that I found is really helpful also figuring out what the app does in general, it is very important before you dive into coding because from that, you know what you are going to tackle.
 
