@@ -1,3 +1,4 @@
+# Mahanoro Station
 # Graded Project - Mahanoro Station
 
 ![Design preview for the Mahanoro station coding challenge](./design/1.png)
@@ -23,21 +24,9 @@ Your task is to build out the project to the designs from this Figma link: https
 
 The data from the trips are available on this link : https://gist.githubusercontent.com/Pinois/36bb5fbf9b6a686f0baf4006dd137bca/raw/a40d8b3f696a75f388db286d57bdd05a925fa0e7/trips.json
 
-## Building your project
 
-
-## Submit your project
-
-You have until **Tuesday** at **15h30** to submit your github link and netlify link on this form : https://forms.gle/ikBWC2MokmdH4jdw6
-
-**Have fun building!** 🚀
-
-
-# Country Quiz
 
 **Icon**: https://google.github.io/material-design-icons/
-
-**API**: https://restcountries.eu/
 
 **Design** : https://www.figma.com/file/6gSAJpaedebKAUuaM4ekFR/Mahanoro-Station?node-id=4%3A38
 
@@ -65,7 +54,6 @@ You have until **Tuesday** at **15h30** to submit your github link and netlify l
 -   [Built With](#built-with)
 -   [How to use](#how-to-use)
 -   [Contact](#contact)
--   [Acknowledgements](#acknowledgements)
 -   [Descrition](#acknowledgements)
 
 <!-- OVERVIEW -->
@@ -77,9 +65,13 @@ You have until **Tuesday** at **15h30** to submit your github link and netlify l
       Work Demo
     </a>. The project was fun to play with, I loved it. Although it is not perfect.
 
--   My experience was when I was working out a big statement, I needed to break it down into as small as possible parts. It is much easier to handle it little by little. Figuring out what the app does is very important before you dive into coding.
+-   This project was fun to play with. It's a big one but I liked it. Some of the features are not accomplished, however, some are ok. To be direct the app is not fully completed. The cancel button is still not working properly.
 
--   
+-  If I had more time, I would fix the cancel buttons and also when I update the bookings it should lead me to the seats page, wheras it stays on the account page, so I definetely would improve that issue.
+
+-   My experience was, when I was working on a big statement, I needed to break it down into as small as possible parts, I found that detailing is really hard. It is much easier to handle it little by little. One tip that I found is really helpful also figuring out what the app does in general, it is very important before you dive into coding because from that, you know what you are going to tackle.
+
+-   The most challenging part was, breaking down the statement, plannig and data structuring. I found they are the fundamental piece to start the project. Apart from that, updating nested and and objects are still a bit blury but I think that will be just fine in the long run.
 
 -   One thing I think is a wisdom that I would like to share is : it is very crucial to have a general idea about what the app is doing and start to break big problems to smaller once before diving into coding. No matter how tough it is, break the big problems down into as small parts as possible before tackling them. If you have a good base the likelyhood of having a good end is very heigh.
 
@@ -87,6 +79,8 @@ You have until **Tuesday** at **15h30** to submit your github link and netlify l
 
 
 -   [React](https://reactjs.org/)
+-   [Date-fns](https://date-fns.org/)
+-   [Redux](https://redux.org/)
 
 ## How To Use
 
@@ -108,10 +102,6 @@ $ npm start
 
 -   GitHub [@starjardin](https://github.com/starjardin)
 
-## Acknowledgements
-
-<!-- This section should list any articles or add-ons/plugins that helps you to complete the project. This is optional but it will help you in the future. For example: -->
-
 ## Description
 
-The main purpose of this app is for practicing redux with react. For front-end developers to boost their knowledge and their tool belt for their future. 
+The main purpose of this app is to practice redux with react. For front-end developers to boost their knowledge and their tool belts.
