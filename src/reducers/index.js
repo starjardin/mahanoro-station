@@ -56,11 +56,14 @@ function trips (state = [], action) {
     case ACTIONS.cancelBookings: {
       console.log(action);
       const arr = action.car.seats.map(i => {
+        if (i.passengerFirstName) {
           return {
             ...i,
-            isAvailable: i.isAvailable,
+            isAvailable: !i.isAvailable,
             passengerFirstName: "",
         }
+        }
+        return i
       })
       const newArr = state.map(item => {
         if (item.id === action.car.id) {

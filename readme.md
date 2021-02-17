@@ -73,7 +73,7 @@ The data from the trips are available on this link : https://gist.githubusercont
 
 -   The most challenging part was, breaking down the statement, plannig and data structuring. I found they are the fundamental piece to start the project. Apart from that, updating nested and and objects are still a bit blury but I think that will be just fine in the long run.
 
--   One thing I think is a wisdom that I would like to share is : it is very crucial to have a general idea about what the app is doing and start to break big problems to smaller once before diving into coding. No matter how tough it is, break the big problems down into as small parts as possible before tackling them. If you have a good base the likelyhood of having a good end is very heigh.
+-   One thing I think is a wisdom that I would like to share is : it is very crucial to have a general idea about what the app is doing and start to break big problems to smaller once before diving into coding. No matter how tough it is, break the big problems down into as small parts as possible before tackling them. If you have a good base the likelyhood of having a good end is very heigh. One thing that I always forget and I think is a good idea is to comment code. I need to start practicing that.
 
 ### Built With
 

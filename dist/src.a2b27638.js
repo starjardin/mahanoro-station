@@ -57988,10 +57988,14 @@ function trips(state = [], action) {
       {
         console.log(action);
         const arr = action.car.seats.map(i => {
-          return { ...i,
-            isAvailable: i.isAvailable,
-            passengerFirstName: ""
-          };
+          if (i.passengerFirstName) {
+            return { ...i,
+              isAvailable: !i.isAvailable,
+              passengerFirstName: ""
+            };
+          }
+
+          return i;
         });
         const newArr = state.map(item => {
           if (item.id === action.car.id) {
