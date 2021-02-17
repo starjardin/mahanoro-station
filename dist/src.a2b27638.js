@@ -36255,6 +36255,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.loadingState = loadingState;
 exports.bookSeat = bookSeat;
 exports.bookingSeats = bookingSeats;
+exports.confirmBookings = confirmBookings;
 exports.toggleModal = toggleModal;
 exports.ACTIONS = void 0;
 
@@ -36264,7 +36265,8 @@ const ACTIONS = {
   loadingState: "LOADIGN_STATE",
   toggleModal: "TOGGLE_MODAL",
   bookSeat: "BOOK_SEAT",
-  bookings: "BOOKINGS"
+  bookings: "BOOKINGS",
+  confirmBookings: "CONFIRM_BOOKINGS"
 };
 exports.ACTIONS = ACTIONS;
 
@@ -36298,6 +36300,13 @@ function bookingSeats(item, id, users) {
     payload: item,
     id: id,
     users: users
+  };
+}
+
+function confirmBookings(car) {
+  return {
+    type: ACTIONS.confirmBookings,
+    car: car
   };
 }
 
@@ -57472,9 +57481,13 @@ var _react = _interopRequireDefault(require("react"));
 
 var _reactRedux = require("react-redux");
 
+var _reactRouterDom = require("react-router-dom");
+
 var _components = require("../components");
 
 var _buttonContainer = _interopRequireDefault(require("./buttonContainer"));
+
+var _actions = require("../actions");
 
 var _myBookingsContainer = _interopRequireDefault(require("./myBookingsContainer"));
 
@@ -57482,7 +57495,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function AccountContainer() {
   const users = (0, _reactRedux.useSelector)(state => state.users);
-  return /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "My personal information: "), /*#__PURE__*/_react.default.createElement(_components.Account.Form, null, /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "First Name"), /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
+  const trips = (0, _reactRedux.useSelector)(state => state.trips);
+  const {
+    id
+  } = (0, _reactRouterDom.useParams)();
+  const car = trips.find(item => Number(item.id) === Number(id));
+  const dispatch = (0, _reactRedux.useDispatch)();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch((0, _actions.confirmBookings)(car));
+  }
+
+  return /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "My personal information: "), /*#__PURE__*/_react.default.createElement(_components.Account.Form, {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "First Name"), /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
     type: "text",
     placeholder: users.firstName
   }), /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "Last Name"), /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
@@ -57497,7 +57524,7 @@ function AccountContainer() {
     color: "#fff"
   })))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "My Bookings"), /*#__PURE__*/_react.default.createElement(_myBookingsContainer.default, null)));
 }
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../components":"src/components/index.js","./buttonContainer":"src/containers/buttonContainer.js","./myBookingsContainer":"src/containers/myBookingsContainer.js"}],"src/pages/account.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js","./buttonContainer":"src/containers/buttonContainer.js","../actions":"src/actions/index.js","./myBookingsContainer":"src/containers/myBookingsContainer.js"}],"src/pages/account.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57867,7 +57894,6 @@ function trips(state = [], action) {
 
     case _actions.ACTIONS.bookSeat:
       {
-        console.log(action.users);
         const arr = action.car.seats.map(i => {
           if (i.id === action.payload.id) {
             return { ...i,
@@ -57878,7 +57904,25 @@ function trips(state = [], action) {
 
           return i;
         });
-        console.log(arr);
+        const newArr = state.map(item => {
+          if (item.id === action.car.id) {
+            return { ...item,
+              seats: arr
+            };
+          }
+
+          return item;
+        });
+        return newArr;
+      }
+
+    case _actions.ACTIONS.confirmBookings:
+      {
+        const arr = action.car.seats.map(i => {
+          return { ...i,
+            passengerFirstName: ""
+          };
+        });
         const newArr = state.map(item => {
           if (item.id === action.car.id) {
             return { ...item,
@@ -58003,7 +58047,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59664" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53759" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

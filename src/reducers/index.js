@@ -14,19 +14,34 @@ function trips (state = [], action) {
       return action.payload
     }
     case ACTIONS.bookSeat: {
-      console.log(action.users);
       const arr = action.car.seats.map(i => {
         if (i.id === action.payload.id) {
           return {
             ...i,
             isAvailable: !i.isAvailable,
             passengerFirstName: i.isAvailable ? action.users.firstName : "",
-            
           }
         }
         return i
       })
-      console.log(arr);
+      const newArr = state.map(item => {
+        if (item.id === action.car.id) {
+          return {
+            ...item,
+            seats : arr
+          }
+        }
+        return item
+      })
+      return newArr
+    }
+    case ACTIONS.confirmBookings : {
+      const arr = action.car.seats.map(i => {
+          return {
+            ...i,
+            passengerFirstName: "",
+        }
+      })
       const newArr = state.map(item => {
         if (item.id === action.car.id) {
           return {

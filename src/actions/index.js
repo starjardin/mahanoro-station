@@ -4,7 +4,8 @@ export const ACTIONS = {
   loadingState: "LOADIGN_STATE",
   toggleModal: "TOGGLE_MODAL",
   bookSeat: "BOOK_SEAT",
-  bookings: "BOOKINGS"
+  bookings: "BOOKINGS",
+  confirmBookings: "CONFIRM_BOOKINGS",
 }
 
 export function loadingState () {
@@ -33,6 +34,13 @@ export function bookingSeats (item, id, users) {
     payload: item,
     id: id,
     users: users
+  }
+}
+
+export function confirmBookings (car) {
+  return {
+    type: ACTIONS.confirmBookings,
+    car: car
   }
 }
 
