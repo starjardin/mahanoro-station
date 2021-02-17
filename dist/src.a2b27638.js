@@ -57986,9 +57986,10 @@ function trips(state = [], action) {
 
     case _actions.ACTIONS.cancelBookings:
       {
+        console.log(action);
         const arr = action.car.seats.map(i => {
           return { ...i,
-            isAvailable: !i.isAvailable,
+            isAvailable: i.isAvailable,
             passengerFirstName: ""
           };
         });
