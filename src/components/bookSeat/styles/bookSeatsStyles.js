@@ -7,6 +7,8 @@ export const Container = styled.div`
     width: 90vw;
     height: 90vh;
   `}
+  max-width: 800px;
+  margin: auto;
 `
 export const Header = styled.header``
 export const Pannel = styled.div`

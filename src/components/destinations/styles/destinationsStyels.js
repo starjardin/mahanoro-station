@@ -2,10 +2,12 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   text-align: center;
+  max-width: 800px;
+  margin: auto;
 `
 export const ListContainer = styled.ul`
   display: grid;
-  grid-template-columns : repeat(auto-fill, minmax(430px, 1fr));
+  grid-template-columns : repeat(auto-fill, minmax(350px, 1fr));
   column-gap: 2rem;
   row-gap: 1rem;
   padding: 0;

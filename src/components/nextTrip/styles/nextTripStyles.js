@@ -1,8 +1,13 @@
 import styled from 'styled-components'
 
-export const Container = styled.div``
+export const Container = styled.div`
+  max-width: 800px;
+  margin: auto;
+`
 
-export const Link = styled.div``
+export const Link = styled.div`
+  cursor: pointer;
+`
 
 export const Header = styled.header`
   display: flex;
@@ -26,6 +31,7 @@ export const Item = styled.li`
   justify-content: space-between;
   list-style: none;
   margin: 20px;
+  border-bottom: 1px solid #ccc;
 `
 export const Pane = styled.div`
   margin: 10px;

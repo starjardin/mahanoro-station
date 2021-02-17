@@ -36256,6 +36256,7 @@ exports.loadingState = loadingState;
 exports.bookSeat = bookSeat;
 exports.bookingSeats = bookingSeats;
 exports.confirmBookings = confirmBookings;
+exports.cancelBookings = cancelBookings;
 exports.toggleModal = toggleModal;
 exports.ACTIONS = void 0;
 
@@ -36266,7 +36267,8 @@ const ACTIONS = {
   toggleModal: "TOGGLE_MODAL",
   bookSeat: "BOOK_SEAT",
   bookings: "BOOKINGS",
-  confirmBookings: "CONFIRM_BOOKINGS"
+  confirmBookings: "CONFIRM_BOOKINGS",
+  cancelBookings: "CANCEL_BOOKINGS"
 };
 exports.ACTIONS = ACTIONS;
 
@@ -36306,6 +36308,13 @@ function bookingSeats(item, id, users) {
 function confirmBookings(car) {
   return {
     type: ACTIONS.confirmBookings,
+    car: car
+  };
+}
+
+function cancelBookings(car) {
+  return {
+    type: ACTIONS.cancelBookings,
     car: car
   };
 }
@@ -38349,11 +38358,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const Container = _styledComponents.default.div`
   text-align: center;
+  max-width: 800px;
+  margin: auto;
 `;
 exports.Container = Container;
 const ListContainer = _styledComponents.default.ul`
   display: grid;
-  grid-template-columns : repeat(auto-fill, minmax(430px, 1fr));
+  grid-template-columns : repeat(auto-fill, minmax(350px, 1fr));
   column-gap: 2rem;
   row-gap: 1rem;
   padding: 0;
@@ -38446,9 +38457,14 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const Container = _styledComponents.default.div``;
+const Container = _styledComponents.default.div`
+  max-width: 800px;
+  margin: auto;
+`;
 exports.Container = Container;
-const Link = _styledComponents.default.div``;
+const Link = _styledComponents.default.div`
+  cursor: pointer;
+`;
 exports.Link = Link;
 const Header = _styledComponents.default.header`
   display: flex;
@@ -38473,6 +38489,7 @@ const Item = _styledComponents.default.li`
   justify-content: space-between;
   list-style: none;
   margin: 20px;
+  border-bottom: 1px solid #ccc;
 `;
 exports.Item = Item;
 const Pane = _styledComponents.default.div`
@@ -38648,6 +38665,8 @@ const Container = _styledComponents.default.div`
     width: 90vw;
     height: 90vh;
   `}
+  max-width: 800px;
+  margin: auto;
 `;
 exports.Container = Container;
 const Header = _styledComponents.default.header``;
@@ -38836,6 +38855,8 @@ const Container = _styledComponents.default.div`
   display: flex;
   flex-direction: row;
   gap: 1.5rem;
+  max-width: 800px;
+  margin: auto;
 `;
 exports.Container = Container;
 const Form = _styledComponents.default.form`
@@ -57437,6 +57458,8 @@ var _buttonContainer = _interopRequireDefault(require("./buttonContainer"));
 
 var _utils = require("../utils");
 
+var _actions = require("../actions");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const MyBookingsContainer = () => {
@@ -57446,7 +57469,7 @@ const MyBookingsContainer = () => {
   const {
     id
   } = (0, _reactRouterDom.useParams)();
-  console.log(bookings);
+  const dispatch = (0, _reactRedux.useDispatch)();
   const taxi = trips.find(item => Number(item.id) == Number(id));
   const destination = taxi?.destination;
   const price = taxi?.price * bookings.length;
@@ -57455,13 +57478,15 @@ const MyBookingsContainer = () => {
   return /*#__PURE__*/_react.default.createElement(_components.MyBookings, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Header, null, "My account  \xA0", /*#__PURE__*/_react.default.createElement("span", null, users.firstName, " ", users.lastName)), bookings?.length > 0 ? /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListContainer, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListItem, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("img", {
     src: _car.default,
     alt: "car"
-  })), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("div", null, destination), /*#__PURE__*/_react.default.createElement("div", null, (0, _utils.formatDate)(time, "P"), ", \xA0", (0, _utils.formatDate)(time, "hh"), ": 00")), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("span", null, seatsOnBooking), /*#__PURE__*/_react.default.createElement("span", null, price, " Ar")), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
+  })), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("div", null, destination), /*#__PURE__*/_react.default.createElement("div", null, (0, _utils.formatDate)(time, "P"), ", \xA0", (0, _utils.formatDate)(time, "hh"), ": 00")), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("span", null, seatsOnBooking), /*#__PURE__*/_react.default.createElement("span", null, price, " Ar")), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, {
+    onClick: () => dispatch((0, _actions.cancelBookings)(taxi))
+  }, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
     text: "cancel",
     color: "#fff",
     type: "button"
   })))) : /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/"
-  }, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
+  }, /*#__PURE__*/_react.default.createElement("p", null, "You have not booked seats"), /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
     text: "Want to book seats",
     color: "#FFF"
   })));
@@ -57469,7 +57494,7 @@ const MyBookingsContainer = () => {
 
 var _default = MyBookingsContainer;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js","../../design/car.jpg":"design/car.jpg","./buttonContainer":"src/containers/buttonContainer.js","../utils":"src/utils/index.js"}],"src/containers/AccountContainer.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js","../../design/car.jpg":"design/car.jpg","./buttonContainer":"src/containers/buttonContainer.js","../utils":"src/utils/index.js","../actions":"src/actions/index.js"}],"src/containers/AccountContainer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57935,6 +57960,26 @@ function trips(state = [], action) {
         return newArr;
       }
 
+    case _actions.ACTIONS.cancelBookings:
+      {
+        const arr = action.car.seats.map(i => {
+          return { ...i,
+            isAvailable: !i.isAvailable,
+            passengerFirstName: ""
+          };
+        });
+        const newArr = state.map(item => {
+          if (item.id === action.car.id) {
+            return { ...item,
+              seats: arr
+            };
+          }
+
+          return item;
+        });
+        return newArr;
+      }
+
     default:
       return state;
   }
@@ -57965,6 +58010,11 @@ function bookings(state = [], action) {
     case _actions.ACTIONS.bookings:
       {
         return [...state, action.payload];
+      }
+
+    case _actions.ACTIONS.cancelBookings:
+      {
+        return [];
       }
 
     default:

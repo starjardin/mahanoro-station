@@ -53,6 +53,25 @@ function trips (state = [], action) {
       })
       return newArr
     }
+    case ACTIONS.cancelBookings: {
+      const arr = action.car.seats.map(i => {
+          return {
+            ...i,
+            isAvailable: !i.isAvailable,
+            passengerFirstName: "",
+        }
+      })
+      const newArr = state.map(item => {
+        if (item.id === action.car.id) {
+          return {
+            ...item,
+            seats : arr
+          }
+        }
+        return item
+      })
+      return newArr
+    }
     default: return state
   }
 }
@@ -76,6 +95,9 @@ function bookings (state=[], action) {
   switch (action.type) {
     case ACTIONS.bookings: {
       return [...state, action.payload]
+    }
+    case ACTIONS.cancelBookings: {
+      return []
     }
     default: return state
   }

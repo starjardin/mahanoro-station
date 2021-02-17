@@ -6,6 +6,7 @@ export const ACTIONS = {
   bookSeat: "BOOK_SEAT",
   bookings: "BOOKINGS",
   confirmBookings: "CONFIRM_BOOKINGS",
+  cancelBookings: "CANCEL_BOOKINGS",
 }
 
 export function loadingState () {
@@ -40,6 +41,13 @@ export function bookingSeats (item, id, users) {
 export function confirmBookings (car) {
   return {
     type: ACTIONS.confirmBookings,
+    car: car
+  }
+}
+
+export function cancelBookings (car) {
+  return {
+    type: ACTIONS.cancelBookings,
     car: car
   }
 }

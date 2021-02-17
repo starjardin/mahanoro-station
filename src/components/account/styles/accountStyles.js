@@ -4,6 +4,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   gap: 1.5rem;
+  max-width: 800px;
+  margin: auto;
 `
 export const Form = styled.form`
   display: flex;
