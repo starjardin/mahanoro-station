@@ -57496,11 +57496,7 @@ const MyBookingsContainer = () => {
   } = (0, _reactRouterDom.useParams)();
   const dispatch = (0, _reactRedux.useDispatch)();
   const taxi = trips.find(item => Number(item.id) == Number(id));
-  const bookingLength = bookings.find(item => item.destination === taxi?.destination);
-  const destination = taxi?.destination;
-  const price = taxi?.price * bookingLength?.seats.length;
   const time = taxi?.departureTime;
-  const seatsOnBooking = bookingLength?.seats.length > 1 ? bookingLength.seats.length + ` seats` : bookingLength?.seats.length + ` seat`;
   return /*#__PURE__*/_react.default.createElement(_components.MyBookings, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Header, null, "My account  \xA0", /*#__PURE__*/_react.default.createElement("span", null, users.firstName, " ", users.lastName)), bookings.map((item, index) => {
     if (item.seats.length > 0) {
       return /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListContainer, {
@@ -57508,7 +57504,7 @@ const MyBookingsContainer = () => {
       }, /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListItem, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("img", {
         src: _car.default,
         alt: "car"
-      })), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("div", null, destination), /*#__PURE__*/_react.default.createElement("div", null, (0, _utils.formatDate)(time, "P"), ", \xA0", (0, _utils.formatDate)(time, "hh"), ": 00")), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("span", null, seatsOnBooking), /*#__PURE__*/_react.default.createElement("span", null, price, " Ar")), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, {
+      })), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("div", null, item.destination), /*#__PURE__*/_react.default.createElement("div", null, (0, _utils.formatDate)(time, "P"), ", \xA0", (0, _utils.formatDate)(time, "hh"), ": 00")), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("span", null, item.seats.length + ` seats`), /*#__PURE__*/_react.default.createElement("span", null, item.price * item.seats.length, " Ar")), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, {
         onClick: () => dispatch((0, _actions.cancelBookings)(taxi))
       }, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
         text: "cancel",
@@ -58035,16 +58031,20 @@ function modal(state = false, action) {
 
 const initialBookings = [{
   destination: "Vatomandry",
-  seats: []
+  seats: [],
+  price: 10000
 }, {
   destination: "Antananarivo",
-  seats: []
+  seats: [],
+  price: 20000
 }, {
   destination: "Toamasina",
-  seats: []
+  seats: [],
+  price: 20000
 }, {
   destination: "Moramanga",
-  seats: []
+  seats: [],
+  price: 15000
 }];
 
 function bookings(state = initialBookings, action) {
@@ -58081,9 +58081,9 @@ function bookings(state = initialBookings, action) {
             };
           }
 
-          console.log(bookings);
           return item;
         });
+        console.log(bookings);
         return bookings;
       }
 
@@ -58169,7 +58169,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53759" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49893" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

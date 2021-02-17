@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import { MyBookings } from '../components'
@@ -17,13 +17,7 @@ const MyBookingsContainer = () => {
   const dispatch = useDispatch()
   
   const taxi = trips.find(item => Number(item.id) == Number(id))
-  const bookingLength = bookings.find(item => item.destination === taxi?.destination)
-  const destination = taxi?.destination
-  const price = taxi?.price * bookingLength?.seats.length
   const time = taxi?.departureTime
-  const seatsOnBooking = bookingLength?.seats.length > 1
-    ? bookingLength.seats.length + ` seats`
-    : bookingLength?.seats.length + ` seat`
   
   return <MyBookings>
     <MyBookings.Header>
@@ -41,7 +35,7 @@ const MyBookingsContainer = () => {
                 </MyBookings.Pane>
                 <MyBookings.Pane>
                   <div>
-                    { destination }
+                    { item.destination }
                   </div>
                   <div>
                     { formatDate(time, "P") }, &nbsp;
@@ -50,10 +44,10 @@ const MyBookingsContainer = () => {
                 </MyBookings.Pane>
                 <MyBookings.Pane>
                   <span>
-                    {seatsOnBooking}
+                    {item.seats.length + ` seats`}
                   </span>
                   <span>
-                    {price} Ar
+                    {item.price * item.seats.length} Ar
                   </span>
                 </MyBookings.Pane>
                 <MyBookings.Pane onClick={() => dispatch(cancelBookings(taxi))}>

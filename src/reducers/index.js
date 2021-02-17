@@ -94,19 +94,23 @@ function modal (state=false, action) {
 const initialBookings = [
   {
     destination: "Vatomandry",
-    seats: []
+    seats: [],
+    price: 10000,
   },
   {
     destination: "Antananarivo",
-    seats: []
+    seats: [],
+    price: 20000,
   },
   {
     destination: "Toamasina",
-    seats: []
+    seats: [],
+    price: 20000,
   },
   {
     destination: "Moramanga",
-    seats: []
+    seats: [],
+    price: 15000,
   }
 ]
 
@@ -141,9 +145,9 @@ function bookings (state=initialBookings, action) {
             seats: []
           }
         }
-        console.log(bookings);
         return item
       })
+      console.log(bookings);
       return bookings
     }
     default: return state
