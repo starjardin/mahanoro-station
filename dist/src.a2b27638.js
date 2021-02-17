@@ -36237,94 +36237,7 @@ if ("development" !== "production") {
     style: _propTypes.default.object
   });
 }
-},{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"src/constant/index.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.URL = void 0;
-const URL = 'https://gist.githubusercontent.com/Pinois/36bb5fbf9b6a686f0baf4006dd137bca/raw/a40d8b3f696a75f388db286d57bdd05a925fa0e7/trips.json';
-exports.URL = URL;
-},{}],"src/actions/index.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.loadingState = loadingState;
-exports.bookSeat = bookSeat;
-exports.bookingSeats = bookingSeats;
-exports.confirmBookings = confirmBookings;
-exports.cancelBookings = cancelBookings;
-exports.toggleModal = toggleModal;
-exports.ACTIONS = void 0;
-
-var _constant = require("../constant/");
-
-const ACTIONS = {
-  loadingState: "LOADIGN_STATE",
-  toggleModal: "TOGGLE_MODAL",
-  bookSeat: "BOOK_SEAT",
-  bookings: "BOOKINGS",
-  confirmBookings: "CONFIRM_BOOKINGS",
-  cancelBookings: "CANCEL_BOOKINGS"
-};
-exports.ACTIONS = ACTIONS;
-
-function loadingState() {
-  return dispatch => {
-    async function fectchData() {
-      const res = await fetch(_constant.URL);
-      const data = await res.json();
-      dispatch({
-        type: ACTIONS.loadingState,
-        payload: data
-      });
-    }
-
-    fectchData();
-  };
-}
-
-function bookSeat(item, car, users) {
-  return {
-    type: ACTIONS.bookSeat,
-    payload: item,
-    car: car,
-    users: users
-  };
-}
-
-function bookingSeats(item, id, users) {
-  return {
-    type: ACTIONS.bookings,
-    payload: item,
-    id: id,
-    users: users
-  };
-}
-
-function confirmBookings(car) {
-  return {
-    type: ACTIONS.confirmBookings,
-    car: car
-  };
-}
-
-function cancelBookings(car) {
-  return {
-    type: ACTIONS.cancelBookings,
-    car: car
-  };
-}
-
-function toggleModal() {
-  return {
-    type: ACTIONS.toggleModal
-  };
-}
-},{"../constant/":"src/constant/index.js"}],"node_modules/shallowequal/index.js":[function(require,module,exports) {
+},{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"node_modules/shallowequal/index.js":[function(require,module,exports) {
 //
 
 module.exports = function shallowEqual(objA, objB, compare, compareContext) {
@@ -38245,7 +38158,116 @@ exports.ServerStyleSheet = Ue;
 "production" !== "development" && "undefined" != typeof navigator && "ReactNative" === navigator.product && console.warn("It looks like you've imported 'styled-components' on React Native.\nPerhaps you're looking to import 'styled-components/native'?\nRead more about this at https://www.styled-components.com/docs/basics#react-native"), "production" !== "development" && "test" !== "development" && (window["__styled-components-init__"] = window["__styled-components-init__"] || 0, 1 === window["__styled-components-init__"] && console.warn("It looks like there are several instances of 'styled-components' initialized in this application. This may cause dynamic styles to not render properly, errors during the rehydration process, a missing theme prop, and makes your application bigger without good reason.\n\nSee https://s-c.sh/2BAXzed for more info."), window["__styled-components-init__"] += 1);
 var _default = qe;
 exports.default = _default;
-},{"react-is":"node_modules/react-is/index.js","react":"node_modules/react/index.js","shallowequal":"node_modules/shallowequal/index.js","@emotion/stylis":"node_modules/@emotion/stylis/dist/stylis.browser.esm.js","@emotion/unitless":"node_modules/@emotion/unitless/dist/unitless.browser.esm.js","@emotion/is-prop-valid":"node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js","hoist-non-react-statics":"node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js","process":"../../../AppData/Roaming/npm/node_modules/parcel/node_modules/process/browser.js"}],"src/components/header/styles/headerStyles.js":[function(require,module,exports) {
+},{"react-is":"node_modules/react-is/index.js","react":"node_modules/react/index.js","shallowequal":"node_modules/shallowequal/index.js","@emotion/stylis":"node_modules/@emotion/stylis/dist/stylis.browser.esm.js","@emotion/unitless":"node_modules/@emotion/unitless/dist/unitless.browser.esm.js","@emotion/is-prop-valid":"node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js","hoist-non-react-statics":"node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js","process":"../../../AppData/Roaming/npm/node_modules/parcel/node_modules/process/browser.js"}],"src/global-styles.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GlobalStyles = void 0;
+
+var _styledComponents = require("styled-components");
+
+const GlobalStyles = (0, _styledComponents.createGlobalStyle)`
+  *, *:before, *:after {
+    box-sizing: border-box;
+  }
+  html, body {
+    height: 100%;
+    font-family: 'Rubik', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+}`;
+exports.GlobalStyles = GlobalStyles;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/constant/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.URL = void 0;
+const URL = 'https://gist.githubusercontent.com/Pinois/36bb5fbf9b6a686f0baf4006dd137bca/raw/a40d8b3f696a75f388db286d57bdd05a925fa0e7/trips.json';
+exports.URL = URL;
+},{}],"src/actions/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.loadingState = loadingState;
+exports.bookSeat = bookSeat;
+exports.bookingSeats = bookingSeats;
+exports.confirmBookings = confirmBookings;
+exports.cancelBookings = cancelBookings;
+exports.toggleModal = toggleModal;
+exports.ACTIONS = void 0;
+
+var _constant = require("../constant/");
+
+const ACTIONS = {
+  loadingState: "LOADIGN_STATE",
+  toggleModal: "TOGGLE_MODAL",
+  bookSeat: "BOOK_SEAT",
+  bookings: "BOOKINGS",
+  confirmBookings: "CONFIRM_BOOKINGS",
+  cancelBookings: "CANCEL_BOOKINGS"
+};
+exports.ACTIONS = ACTIONS;
+
+function loadingState() {
+  return dispatch => {
+    async function fectchData() {
+      const res = await fetch(_constant.URL);
+      const data = await res.json();
+      dispatch({
+        type: ACTIONS.loadingState,
+        payload: data
+      });
+    }
+
+    fectchData();
+  };
+}
+
+function bookSeat(item, car, users) {
+  return {
+    type: ACTIONS.bookSeat,
+    payload: item,
+    car: car,
+    users: users
+  };
+}
+
+function bookingSeats(item, id, users) {
+  return {
+    type: ACTIONS.bookings,
+    payload: item,
+    id: id,
+    users: users
+  };
+}
+
+function confirmBookings(car) {
+  return {
+    type: ACTIONS.confirmBookings,
+    car: car
+  };
+}
+
+function cancelBookings(car) {
+  return {
+    type: ACTIONS.cancelBookings,
+    car: car
+  };
+}
+
+function toggleModal() {
+  return {
+    type: ACTIONS.toggleModal
+  };
+}
+},{"../constant/":"src/constant/index.js"}],"src/components/header/styles/headerStyles.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -58009,7 +58031,16 @@ function bookings(state = [], action) {
   switch (action.type) {
     case _actions.ACTIONS.bookings:
       {
-        return [...state, action.payload];
+        let arr = state;
+        const newArr = state.some(i => i.id === action.payload.id);
+
+        if (newArr) {
+          arr = arr.filter(item => item.id !== action.payload.id);
+        } else {
+          arr = [...state, action.payload];
+        }
+
+        return arr;
       }
 
     case _actions.ACTIONS.cancelBookings:
@@ -58060,6 +58091,8 @@ var _reactRedux = require("react-redux");
 
 var _reactRouterDom = require("react-router-dom");
 
+var _globalStyles = require("./global-styles");
+
 var _App = _interopRequireDefault(require("./App"));
 
 var _store = _interopRequireDefault(require("./store"));
@@ -58068,8 +58101,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 (0, _reactDom.render)( /*#__PURE__*/_react.default.createElement(_reactRedux.Provider, {
   store: _store.default
-}, /*#__PURE__*/_react.default.createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react.default.createElement(_App.default, null))), document.querySelector("#root"));
-},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./App":"src/App.js","./store":"src/store.js"}],"../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+}, /*#__PURE__*/_react.default.createElement(_globalStyles.GlobalStyles, null), /*#__PURE__*/_react.default.createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react.default.createElement(_App.default, null))), document.querySelector("#root"));
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./global-styles":"src/global-styles.js","./App":"src/App.js","./store":"src/store.js"}],"../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

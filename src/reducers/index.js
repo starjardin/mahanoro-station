@@ -94,7 +94,14 @@ function modal (state=false, action) {
 function bookings (state=[], action) {
   switch (action.type) {
     case ACTIONS.bookings: {
-      return [...state, action.payload]
+      let arr = state
+      const newArr = (state.some(i => i.id === action.payload.id))
+      if (newArr) {
+        arr = arr.filter(item => item.id !== action.payload.id)
+      } else {
+        arr = [...state, action.payload]
+      }
+      return arr
     }
     case ACTIONS.cancelBookings: {
       return []
