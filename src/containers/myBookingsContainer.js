@@ -17,10 +17,13 @@ const MyBookingsContainer = () => {
   const dispatch = useDispatch()
   
   const taxi = trips.find(item => Number(item.id) == Number(id))
+  const bookingLength = bookings.find(item => item.destination === taxi?.destination)
   const destination = taxi?.destination
-  const price = taxi?.price * bookings.length
+  const price = taxi?.price * bookingLength?.seats.length
   const time = taxi?.departureTime
-  const seatsOnBooking = bookings.length > 1 ? bookings.length + ` seats` : bookings.length + ` seat`
+  const seatsOnBooking = bookingLength?.seats.length > 1
+    ? bookingLength.seats.length + ` seats`
+    : bookingLength?.seats.length + ` seat`
   
   return <MyBookings>
     <MyBookings.Header>
@@ -28,47 +31,44 @@ const MyBookingsContainer = () => {
       <span>{ users.firstName } { users.lastName }</span>
     </MyBookings.Header>
     {
-      bookings?.length > 0
-        ? <MyBookings.ListContainer>
-          <MyBookings.ListItem>
-            <MyBookings.Pane>
-              <img src={ car } alt="car" />
-            </MyBookings.Pane>
-            <MyBookings.Pane>
-              <div>
-                { destination }
-              </div>
-              <div>
-                { formatDate(time, "P") }, &nbsp;
-                { formatDate(time, "hh") }: 00
-              </div>
-            </MyBookings.Pane>
-            <MyBookings.Pane>
-              <span>
-                {seatsOnBooking}
-              </span>
-              <span>
-                {price} Ar
-              </span>
-            </MyBookings.Pane>
-            <MyBookings.Pane onClick={() => dispatch(cancelBookings(taxi))}>
-              <ButtonContainer
-                text="cancel"
-                color="#fff"
-                type="button"
-              />
-            </MyBookings.Pane>
-          </MyBookings.ListItem>
+      bookings.map((item, index) => {
+        if (item.seats.length > 0) {
+          return (
+            <MyBookings.ListContainer key={index}>
+              <MyBookings.ListItem>
+                <MyBookings.Pane>
+                  <img src={ car } alt="car" />
+                </MyBookings.Pane>
+                <MyBookings.Pane>
+                  <div>
+                    { destination }
+                  </div>
+                  <div>
+                    { formatDate(time, "P") }, &nbsp;
+                    { formatDate(time, "hh") }: 00
+                  </div>
+                </MyBookings.Pane>
+                <MyBookings.Pane>
+                  <span>
+                    {seatsOnBooking}
+                  </span>
+                  <span>
+                    {price} Ar
+                  </span>
+                </MyBookings.Pane>
+                <MyBookings.Pane onClick={() => dispatch(cancelBookings(taxi))}>
+                  <ButtonContainer
+                    text="cancel"
+                    color="#fff"
+                    type="button"
+                  />
+                </MyBookings.Pane>
+              </MyBookings.ListItem>
             </MyBookings.ListContainer>
-            : <Link to='/'>
-              <p>You have not booked seats</p>
-              <ButtonContainer
-                text="Want to book seats"
-                color="#FFF"
-              />
-            </Link>
+          )
+        }
+      })
     }
   </MyBookings>
 }
-
 export default MyBookingsContainer

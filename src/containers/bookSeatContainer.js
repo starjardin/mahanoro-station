@@ -22,11 +22,12 @@ const BookSeatContainer = () => {
   
   const { id } = useParams()
   const car = trips.find(item => Number(item.id) == Number(id))
+  const bookingsLength = bookings.find(i => i.destination === car?.destination)
   const seats = car?.seats.map((item, index) => (
     <BookSeat.Seat key={ index }
       disabled={!item.isAvailable && !item.passengerFirstName && !item.passengerLastName}
       onClick={ () => (
-        dispatch(bookingSeats(item, id, users)),
+        dispatch(bookingSeats(item, id, users, car)),
         dispatch(bookSeat(item, car, users))
       )
     }>
@@ -65,7 +66,7 @@ const BookSeatContainer = () => {
   </>
   const destination = car?.destination
   const price = car?.price
-  const buttonText = `Book ${bookings.length} seats`
+  const buttonText = `Book ${bookingsLength?.seats.length} seats`
   
   return <BookSeat modal={modal}>
     <BookSeat.Header>
@@ -86,7 +87,7 @@ const BookSeatContainer = () => {
             text={buttonText}
           />
           </div>
-          <p>Total: {bookings?.length * car?.price }</p>
+          <p>Total: {bookingsLength?.seats.length * car?.price }</p>
         </BookSeat.InfoContainer>
       </BookSeat.Pannel>
     </BookSeat.Header>

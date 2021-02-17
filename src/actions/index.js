@@ -29,12 +29,13 @@ export function bookSeat (item, car, users) {
   }
 }
 
-export function bookingSeats (item, id, users) {
+export function bookingSeats (item, id, users, car) {
   return {
     type: ACTIONS.bookings,
     payload: item,
     id: id,
-    users: users
+    users: users,
+    car: car,
   }
 }
 

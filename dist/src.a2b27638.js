@@ -38239,12 +38239,13 @@ function bookSeat(item, car, users) {
   };
 }
 
-function bookingSeats(item, id, users) {
+function bookingSeats(item, id, users, car) {
   return {
     type: ACTIONS.bookings,
     payload: item,
     id: id,
-    users: users
+    users: users,
+    car: car
   };
 }
 
@@ -38682,10 +38683,11 @@ const Container = _styledComponents.default.div`
   ${({
   modal
 }) => modal && `
-    background-color: #fefefefe;
-    opacity: .2;
-    width: 90vw;
-    height: 90vh;
+    background-color: #ccc;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    pointer-events: none;
   `}
   max-width: 800px;
   margin: auto;
@@ -38742,6 +38744,7 @@ const Modal = _styledComponents.default.div`
   align-items: center;
   justify-content: center;
   background-color: #fefefefe;
+  pointer-events: all;
 `;
 exports.Modal = Modal;
 const ModalWarning = _styledComponents.default.h2`
@@ -57493,25 +57496,27 @@ const MyBookingsContainer = () => {
   } = (0, _reactRouterDom.useParams)();
   const dispatch = (0, _reactRedux.useDispatch)();
   const taxi = trips.find(item => Number(item.id) == Number(id));
+  const bookingLength = bookings.find(item => item.destination === taxi?.destination);
   const destination = taxi?.destination;
-  const price = taxi?.price * bookings.length;
+  const price = taxi?.price * bookingLength?.seats.length;
   const time = taxi?.departureTime;
-  const seatsOnBooking = bookings.length > 1 ? bookings.length + ` seats` : bookings.length + ` seat`;
-  return /*#__PURE__*/_react.default.createElement(_components.MyBookings, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Header, null, "My account  \xA0", /*#__PURE__*/_react.default.createElement("span", null, users.firstName, " ", users.lastName)), bookings?.length > 0 ? /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListContainer, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListItem, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: _car.default,
-    alt: "car"
-  })), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("div", null, destination), /*#__PURE__*/_react.default.createElement("div", null, (0, _utils.formatDate)(time, "P"), ", \xA0", (0, _utils.formatDate)(time, "hh"), ": 00")), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("span", null, seatsOnBooking), /*#__PURE__*/_react.default.createElement("span", null, price, " Ar")), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, {
-    onClick: () => dispatch((0, _actions.cancelBookings)(taxi))
-  }, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
-    text: "cancel",
-    color: "#fff",
-    type: "button"
-  })))) : /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/"
-  }, /*#__PURE__*/_react.default.createElement("p", null, "You have not booked seats"), /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
-    text: "Want to book seats",
-    color: "#FFF"
-  })));
+  const seatsOnBooking = bookingLength?.seats.length > 1 ? bookingLength.seats.length + ` seats` : bookingLength?.seats.length + ` seat`;
+  return /*#__PURE__*/_react.default.createElement(_components.MyBookings, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Header, null, "My account  \xA0", /*#__PURE__*/_react.default.createElement("span", null, users.firstName, " ", users.lastName)), bookings.map((item, index) => {
+    if (item.seats.length > 0) {
+      return /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListContainer, {
+        key: index
+      }, /*#__PURE__*/_react.default.createElement(_components.MyBookings.ListItem, null, /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("img", {
+        src: _car.default,
+        alt: "car"
+      })), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("div", null, destination), /*#__PURE__*/_react.default.createElement("div", null, (0, _utils.formatDate)(time, "P"), ", \xA0", (0, _utils.formatDate)(time, "hh"), ": 00")), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, null, /*#__PURE__*/_react.default.createElement("span", null, seatsOnBooking), /*#__PURE__*/_react.default.createElement("span", null, price, " Ar")), /*#__PURE__*/_react.default.createElement(_components.MyBookings.Pane, {
+        onClick: () => dispatch((0, _actions.cancelBookings)(taxi))
+      }, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
+        text: "cancel",
+        color: "#fff",
+        type: "button"
+      }))));
+    }
+  }));
 };
 
 var _default = MyBookingsContainer;
@@ -57640,10 +57645,11 @@ const BookSeatContainer = () => {
     id
   } = (0, _reactRouterDom.useParams)();
   const car = trips.find(item => Number(item.id) == Number(id));
+  const bookingsLength = bookings.find(i => i.destination === car?.destination);
   const seats = car?.seats.map((item, index) => /*#__PURE__*/_react.default.createElement(_components.BookSeat.Seat, {
     key: index,
     disabled: !item.isAvailable && !item.passengerFirstName && !item.passengerLastName,
-    onClick: () => (dispatch((0, _actions.bookingSeats)(item, id, users)), dispatch((0, _actions.bookSeat)(item, car, users)))
+    onClick: () => (dispatch((0, _actions.bookingSeats)(item, id, users, car)), dispatch((0, _actions.bookSeat)(item, car, users)))
   }, item.isAvailable && !item.passengerFirstName && !item.passengerLastName ? /*#__PURE__*/_react.default.createElement("img", {
     src: _seat.default
   }) : !item.isAvailable && item.passengerFirstName ? /*#__PURE__*/_react.default.createElement("img", {
@@ -57667,7 +57673,7 @@ const BookSeatContainer = () => {
 
   const destination = car?.destination;
   const price = car?.price;
-  const buttonText = `Book ${bookings.length} seats`;
+  const buttonText = `Book ${bookingsLength?.seats.length} seats`;
   return /*#__PURE__*/_react.default.createElement(_components.BookSeat, {
     modal: modal
   }, /*#__PURE__*/_react.default.createElement(_components.BookSeat.Header, null, /*#__PURE__*/_react.default.createElement(_components.BookSeat.Title, null, /*#__PURE__*/_react.default.createElement("img", {
@@ -57677,7 +57683,7 @@ const BookSeatContainer = () => {
   }, /*#__PURE__*/_react.default.createElement(_buttonContainer.default, {
     color: "#fff",
     text: buttonText
-  })), /*#__PURE__*/_react.default.createElement("p", null, "Total: ", bookings?.length * car?.price)))), /*#__PURE__*/_react.default.createElement("div", null, modal && /*#__PURE__*/_react.default.createElement(_components.BookSeat.Modal, {
+  })), /*#__PURE__*/_react.default.createElement("p", null, "Total: ", bookingsLength?.seats.length * car?.price)))), /*#__PURE__*/_react.default.createElement("div", null, modal && /*#__PURE__*/_react.default.createElement(_components.BookSeat.Modal, {
     modal: modal
   }, /*#__PURE__*/_react.default.createElement(_components.BookSeat.ModalWarning, null, /*#__PURE__*/_react.default.createElement("img", {
     src: _warning.default
@@ -58027,25 +58033,58 @@ function modal(state = false, action) {
   }
 }
 
-function bookings(state = [], action) {
+const initialBookings = [{
+  destination: "Vatomandry",
+  seats: []
+}, {
+  destination: "Antananarivo",
+  seats: []
+}, {
+  destination: "Toamasina",
+  seats: []
+}, {
+  destination: "Moramanga",
+  seats: []
+}];
+
+function bookings(state = initialBookings, action) {
   switch (action.type) {
     case _actions.ACTIONS.bookings:
       {
-        let arr = state;
-        const newArr = state.some(i => i.id === action.payload.id);
+        const booking = state.map(i => {
+          if (i.destination == action.car.destination) {
+            const newArr = i.seats.some(item => item.id === action.payload.id);
 
-        if (newArr) {
-          arr = arr.filter(item => item.id !== action.payload.id);
-        } else {
-          arr = [...state, action.payload];
-        }
+            if (newArr) {
+              return { ...i,
+                seats: i.seats.filter(item => item.id !== action.payload.id)
+              };
+            } else {
+              return { ...i,
+                seats: [...i.seats, action.payload]
+              };
+            }
+          }
 
-        return arr;
+          return i;
+        });
+        return booking;
       }
 
     case _actions.ACTIONS.cancelBookings:
       {
-        return [];
+        const bookings = state.map(item => {
+          if (item.destination == action.car.destination) {
+            console.log(item);
+            return { ...item,
+              seats: []
+            };
+          }
+
+          console.log(bookings);
+          return item;
+        });
+        return bookings;
       }
 
     default:

@@ -91,20 +91,60 @@ function modal (state=false, action) {
   }
 }
 
-function bookings (state=[], action) {
+const initialBookings = [
+  {
+    destination: "Vatomandry",
+    seats: []
+  },
+  {
+    destination: "Antananarivo",
+    seats: []
+  },
+  {
+    destination: "Toamasina",
+    seats: []
+  },
+  {
+    destination: "Moramanga",
+    seats: []
+  }
+]
+
+function bookings (state=initialBookings, action) {
   switch (action.type) {
     case ACTIONS.bookings: {
-      let arr = state
-      const newArr = (state.some(i => i.id === action.payload.id))
-      if (newArr) {
-        arr = arr.filter(item => item.id !== action.payload.id)
-      } else {
-        arr = [...state, action.payload]
-      }
-      return arr
+      const booking = state.map(i => {
+        if (i.destination == action.car.destination) {
+          const newArr = (i.seats.some(item => item.id === action.payload.id))
+          if (newArr) {
+            return {
+            ...i,
+            seats: i.seats.filter(item => item.id !== action.payload.id)
+          }
+          } else {
+            return {
+              ...i,
+              seats: [ ...i.seats, action.payload]
+            }
+          }
+        }
+        return i
+      })
+      return booking
     }
     case ACTIONS.cancelBookings: {
-      return []
+      const bookings = state.map(item => {
+        if (item.destination == action.car.destination) {
+          console.log(item);
+          return {
+            ...item,
+            seats: []
+          }
+        }
+        console.log(bookings);
+        return item
+      })
+      return bookings
     }
     default: return state
   }

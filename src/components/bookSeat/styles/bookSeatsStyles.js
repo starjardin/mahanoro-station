@@ -2,10 +2,11 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   ${({ modal }) => modal && `
-    background-color: #fefefefe;
-    opacity: .2;
-    width: 90vw;
-    height: 90vh;
+    background-color: #ccc;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    pointer-events: none;
   `}
   max-width: 800px;
   margin: auto;
@@ -56,6 +57,7 @@ export const Modal = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #fefefefe;
+  pointer-events: all;
 `
 export const ModalWarning = styled.h2`
   text-transform: uppercase;
